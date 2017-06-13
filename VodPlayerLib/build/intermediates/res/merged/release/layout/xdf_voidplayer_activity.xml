@@ -1,0 +1,71 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color_backgroud">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/app_color_backgroud"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.gensee.view.GSVideoView
+                android:id="@+id/impvoteview"
+                android:layout_width="match_parent"
+                android:layout_height="281dp" />
+
+            <include layout="@layout/rel_tip_layout" />
+
+            <include layout="@layout/xdf_player_bar_top_view" />
+
+            <include
+                layout="@layout/xdf_vodplayer_bar_bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="bottom" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/llt_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/stl_tab"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/white"
+                tl:tl_indicator_color="@color/app_color_main"
+                tl:tl_indicator_height="2dp"
+                tl:tl_indicator_width="21dp"
+                tl:tl_indicator_width_equal_title="true"
+                tl:tl_tab_padding="12dp"
+                tl:tl_tab_space_equal="true"
+                tl:tl_textSelectColor="@color/app_color_main"
+                tl:tl_textUnselectColor="@color/app_color_text_black_first" />
+
+            <View
+                android:id="@+id/sp_line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/app_color_diver" />
+
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/sp_line" />
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

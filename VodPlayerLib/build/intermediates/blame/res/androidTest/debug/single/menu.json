@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "E:\\SDKProject\\XDFSdkPlayer\\VodPlayerLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\menu\\rtmp_source.xml",
+        "source": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\bundles\\default\\res\\menu\\rtmp_source.xml"
+    },
+    {
+        "merged": "E:\\SDKProject\\XDFSdkPlayer\\VodPlayerLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\menu\\main.xml",
+        "source": "E:\\SDKProject\\XDFSdkPlayer\\VodPlayerLib\\build\\intermediates\\bundles\\debug\\res\\menu\\main.xml"
+    }
+]

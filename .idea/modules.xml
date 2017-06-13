@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/VodPlayerLib/VodPlayerLib.iml" filepath="$PROJECT_DIR$/VodPlayerLib/VodPlayerLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XDFSdkPlayer.iml" filepath="$PROJECT_DIR$/XDFSdkPlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rtmpResourceLib/rtmpResourceLib.iml" filepath="$PROJECT_DIR$/rtmpResourceLib/rtmpResourceLib.iml" />
+    </modules>
+  </component>
+</project>

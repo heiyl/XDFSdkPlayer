@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:background="@drawable/mask_down"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <TextView
+        android:id="@+id/tv_peoplecount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:text="观看人数：1"
+        android:textSize="14sp"
+        android:textColor="@color/white"/>
+
+    <ImageView
+        android:id="@+id/iv_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_screen"/>
+    <ImageView
+        android:id="@+id/iv_transmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_transmit"
+        android:layout_toLeftOf="@id/iv_screen"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"/>
+</RelativeLayout>
