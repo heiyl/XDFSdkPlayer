@@ -56,12 +56,12 @@
         "source": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\emotion_se.gif"
     },
     {
-        "merged": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\brow_fn.gif",
-        "source": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\brow_fn.gif"
-    },
-    {
         "merged": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\brow_tkl.png",
         "source": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\brow_tkl.png"
+    },
+    {
+        "merged": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\brow_fn.gif",
+        "source": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\bundles\\debug\\res\\drawable\\brow_fn.gif"
     },
     {
         "merged": "E:\\SDKProject\\XDFSdkPlayer\\rtmpResourceLib\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\emotion_hx.gif",

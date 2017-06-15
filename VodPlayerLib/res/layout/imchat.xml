@@ -5,10 +5,10 @@
     android:orientation="vertical" >
 
    
-    <com.gensee.view.GSImplChatView
+    <com.gensee.view.CustomGSImplChatView
         android:id="@+id/impchatview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </com.gensee.view.GSImplChatView>
+    </com.gensee.view.CustomGSImplChatView>
 
 </LinearLayout>

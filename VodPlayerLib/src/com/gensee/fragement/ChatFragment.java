@@ -11,13 +11,14 @@ import android.view.ViewGroup;
 import com.gensee.entity.UserInfo;
 import com.gensee.player.Player;
 import com.gensee.playerdemo.R;
+import com.gensee.view.CustomGSImplChatView;
 import com.gensee.view.GSImplChatView;
 
 @SuppressLint("ValidFragment")
 public class ChatFragment extends Fragment {
 
 	private Player mPlayer;
-	private GSImplChatView mGSImplChatView;
+	private CustomGSImplChatView mGSImplChatView;
 	private View mView;
 	private UserInfo mUserInfo;
 
@@ -43,9 +44,10 @@ public class ChatFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		mView = inflater.inflate(R.layout.imchat, null);
-		mGSImplChatView = (GSImplChatView) mView.findViewById(R.id.impchatview);
+		mGSImplChatView = (CustomGSImplChatView) mView.findViewById(R.id.impchatview);
+		mGSImplChatView.setPlayer(mPlayer);
 	//	mGSImplChatView.setChatTarget(mUserInfo);
-		mPlayer.setGSChatView(mGSImplChatView);
+//		mPlayer.setGSChatView(mGSImplChatView);
 		return mView;
 	}
 
