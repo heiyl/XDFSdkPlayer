@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_slid_up_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    tools:showIn="@layout/activity_pl_slid_up">
+
+    <RelativeLayout
+        android:id="@+id/rl_slideView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:background="@drawable/rounded_up_corners_bg"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="18dp"
+            android:src="@drawable/delete" />
+
+        <LinearLayout
+            android:id="@+id/ll_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="高一美本留学答疑群"
+                android:textColor="@color/app_color_text_black_third"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/iv_qrcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/default_qrcode" />
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="长按二维码加入群"
+                android:textColor="@color/app_color_text_black_third"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_advisory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="40dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="left|center_vertical"
+                android:text="课程咨询"
+                android:textColor="@color/app_color_text_black_first"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="请留下您的联系方式，我们专业的学习顾问会在课后联系您"
+                android:textColor="@color/app_color_text_black_first"
+                android:textSize="14sp" />
+
+            <com.gensee.view.EditTextWithDel
+                android:id="@+id/user_phone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/edittext_bg"
+                android:cursorVisible="true"
+                android:gravity="center_vertical"
+                android:hint="手机号"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:phoneNumber="true"
+                android:textColor="@color/app_color_text_black_first"
+                android:textColorHint="@color/app_color_text_black_third"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btn_commit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_blue_bg"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_help"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="40dp"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="40dp"-->
+            <!--android:visibility="gone">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:text="课堂助手"-->
+                <!--android:textColor="@color/app_color_text_black_first"-->
+                <!--android:textSize="15sp" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:text="1.为什么听不到老师的声音？"-->
+                <!--android:textColor="@color/app_color_text_black_first"-->
+                <!--android:textSize="14sp" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:text="第一步：直播开始前可点击“开课提醒”获得开课通知，收到通知后点击链接即可听直播\n第二步：建议在WIFI环境下观看直播，播放顺畅不卡顿"-->
+                <!--android:textColor="@color/app_color_text_black_second"-->
+                <!--android:textSize="14sp" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:text="2.视频卡顿怎么解决？"-->
+                <!--android:textColor="@color/app_color_text_black_first"-->
+                <!--android:textSize="14sp" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:text="第一步：直播开始前可点击“开课提醒”获得开课通知，收到通知后点击链接即可听直播\n第二步：建议在WIFI环境下观看直播，播放顺畅不卡顿"-->
+                <!--android:textColor="@color/app_color_text_black_second"-->
+                <!--android:textSize="14sp" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:text="3.直播时为什么会有延迟现象？"-->
+                <!--android:textColor="@color/app_color_text_black_first"-->
+                <!--android:textSize="14sp" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="20dp"-->
+                <!--android:text="第一步：直播开始前可点击“开课提醒”获得开课通知，收到通知后点击链接即可听直播\n第二步：建议在WIFI环境下观看直播，播放顺畅不卡顿"-->
+                <!--android:textColor="@color/app_color_text_black_second"-->
+                <!--android:textSize="14sp" />-->
+
+        <!--</LinearLayout>-->
+
+    </RelativeLayout>
+
+</FrameLayout>

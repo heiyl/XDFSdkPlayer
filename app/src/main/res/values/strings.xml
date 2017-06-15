@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">XDFSdkPlayer</string>
+    <string name="title_activity_plslid_up">PLSlidUpActivity</string>
 </resources>

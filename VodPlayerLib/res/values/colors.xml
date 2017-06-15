@@ -20,4 +20,14 @@
     <color name="app_color_diver">#e5e5e5</color>
     <!--背景颜色-->
     <color name="app_color_backgroud">#f5f5f5</color>
+
+    <color name="color_fcfcfc">#fcfcfc</color>
+    <color name="dimBg">#bf000000</color>
+    <!-- 导航条背景色 -->
+    <color name="app_color_navigation_bar_background">#fafafa</color>
+
+    <drawable name="transparent">#00000000</drawable>
+
+    <color name="blue_large">#39b4ff</color>
+    <color name="blue_low">#72caff</color>
 </resources>

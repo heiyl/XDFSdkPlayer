@@ -50,4 +50,6 @@
     <string name="speed_choice">选择播放速度</string>
     <string name="idcSwitch">网络切换</string>
     <string name="reword">打赏</string>
+    <string name="title_activity_pl_slid_up">PlSlidUpActivity</string>
+    <string name="title_activity_pl_slid_up_help">PlSlidUpHelpActivity</string>
 </resources>
