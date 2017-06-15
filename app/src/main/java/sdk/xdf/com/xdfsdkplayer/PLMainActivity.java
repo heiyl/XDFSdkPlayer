@@ -14,12 +14,13 @@ public class PLMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plmain);
-        TextView hl = (TextView) findViewById(R.id.hl);
+        startActivity(new Intent().setClass(PLMainActivity.this, MainActivity.class));
+        /*TextView hl = (TextView) findViewById(R.id.hl);
         hl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent().setClass(PLMainActivity.this, MainActivity.class));
             }
-        });
+        });*/
     }
 }
