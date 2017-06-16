@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 自定义imageview形状属性 -->
+    <declare-styleable name="CustomImageViewShape">
+        <attr name="shape_type" format="integer" />
+        <attr name="corner_radius" format="integer" />
+    </declare-styleable>
+</resources>

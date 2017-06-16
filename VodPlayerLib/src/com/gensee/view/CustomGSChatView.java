@@ -54,7 +54,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class CustomGSChatView extends GSChatView{
     private TextView tvChatTo;
-    private ImageButton btnSend;
+    private TextView btnSend;
     private ImageButton btnExpression;
     protected ChatEditText chatEditText;
     private LinearLayout lyExpression;
@@ -364,7 +364,7 @@ public abstract class CustomGSChatView extends GSChatView{
     protected void initView(View view) {
         this.tvChatTo = (TextView)view.findViewById(this.getTvChatToId());
         this.tvChatTo.setOnClickListener(this);
-        this.btnSend = (ImageButton)this.findViewById(this.getSendBtnId());
+        this.btnSend = (TextView) this.findViewById(this.getSendBtnId());
         this.btnSend.setOnClickListener(this);
         this.btnExpression = (ImageButton)this.findViewById(this.getExpressionBtnId());
         this.btnExpression.setOnClickListener(this);

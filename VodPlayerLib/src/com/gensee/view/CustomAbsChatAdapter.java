@@ -69,11 +69,11 @@ public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
                 SpannableStringBuilder num = new SpannableStringBuilder(mPublicMessage);
                 num.setSpan(new ForegroundColorSpan(CustomAbsChatAdapter.this.mContext.getResources().getColor(this.getSysMsgColorId())), 0, mString, 33);
                 this.mMyTextViewConS.setText(num);
-                this.mChatNameText.setVisibility(8);
-                this.mChatTimeText.setVisibility(8);
-                this.mMyTextViewEx.setVisibility(8);
-                this.mMyTextViewConS.setVisibility(0);
-                this.mChatDeleteSysteContext.setVisibility(0);
+                this.mChatNameText.setVisibility(View.GONE);
+                this.mChatTimeText.setVisibility(View.GONE);
+                this.mMyTextViewEx.setVisibility(View.GONE);
+                this.mMyTextViewConS.setVisibility(View.VISIBLE);
+                this.mChatDeleteSysteContext.setVisibility(View.VISIBLE);
             } else if(mAbsChatMessage instanceof PrivateMessage) {
                 this.onTimeTextViewGoneVis();
                 PrivateMessage mPublicMessage1 = (PrivateMessage)mAbsChatMessage;
@@ -124,11 +124,11 @@ public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
         }
 
         public void onTimeTextViewGoneVis() {
-            this.mChatNameText.setVisibility(0);
-            this.mChatTimeText.setVisibility(0);
-            this.mMyTextViewEx.setVisibility(0);
-            this.mMyTextViewConS.setVisibility(8);
-            this.mChatDeleteSysteContext.setVisibility(8);
+            this.mChatNameText.setVisibility(View.VISIBLE);
+            this.mChatTimeText.setVisibility(View.VISIBLE);
+            this.mMyTextViewEx.setVisibility(View.VISIBLE);
+            this.mMyTextViewConS.setVisibility(View.GONE);
+            this.mChatDeleteSysteContext.setVisibility(View.GONE);
         }
 
         public void onClick(View v) {

@@ -5,13 +5,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.gensee.adapter.AbsChatAdapter;
 import com.gensee.adapter.AbsGridViewAvatarAdapter;
 import com.gensee.adapter.SelectAvatarInterface;
 import com.gensee.entity.UserInfo;
 import com.gensee.holder.chat.ExpressionResource;
 import com.gensee.player.Player;
-import com.gensee.rtmpresourcelib.R;
+import com.gensee.playerdemo.R;
 import com.gensee.view.AbsChatToPopView.InterfaceSelarctorName;
 
 import java.util.List;
@@ -37,7 +36,7 @@ public class CustomGSImplChatView extends CustomGSChatView {
 		ExpressionResource.initExpressionResource(context);
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		return inflater.inflate(R.layout.chat_view_layout, null);
+		return inflater.inflate(R.layout.xdf_player_chat_view_layout, null);
 	}
 
 	public void setPlayer(Player player){

@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.gensee.adapter.AbstractViewHolder;
-import com.gensee.rtmpresourcelib.R;
+import com.gensee.playerdemo.R;
 
 public class CustomChatImplAdapter extends CustomAbsChatAdapter {
 
@@ -22,7 +22,7 @@ public class CustomChatImplAdapter extends CustomAbsChatAdapter {
 
 	@Override
 	protected View createView(Context context) {
-		View convertView = LayoutInflater.from(context).inflate(R.layout.chat_listitem_layout,
+		View convertView = LayoutInflater.from(context).inflate(R.layout.xdf_player_chat_listitem_layout,
 				null);
 		return convertView;
 
