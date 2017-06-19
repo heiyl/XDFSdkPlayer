@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 19
+    compileSdkVersion 24
     buildToolsVersion '25.0.0'
 
     defaultConfig {
@@ -36,15 +36,20 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.1.0'
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
     compile project(':rtmpResourceLib')
-//    compile 'com.android.support:support-v4:19.0.0'
-//    compile files('libs/gensee_baseplayer.jar')
-//    compile files('libs/gensee_common.jar')
-//    compile files('libs/gensee_doc.jar')
-//    compile files('libs/gensee_hb.jar')
-//    compile files('libs/gensee_vod_ol.jar')
-//    compile 'com.android.support:multidex:1.0.1'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //    compile 'com.android.support:support-v4:19.0.0'
+    //    compile files('libs/gensee_baseplayer.jar')
+    //    compile files('libs/gensee_common.jar')
+    //    compile files('libs/gensee_doc.jar')
+    //    compile files('libs/gensee_hb.jar')
+    //    compile files('libs/gensee_vod_ol.jar')
+    //    compile 'com.android.support:multidex:1.0.1'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-v4:+'
+    compile 'com.android.support:design:+'
+    compile 'com.android.support:support-annotations:+'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'cn.finalteam:okhttpfinal:2.0.7'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }

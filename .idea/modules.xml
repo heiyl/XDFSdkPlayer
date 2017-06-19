@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/XDFSdkPlayer.iml" filepath="$PROJECT_DIR$/XDFSdkPlayer.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/rtmpResourceLib/rtmpResourceLib.iml" filepath="$PROJECT_DIR$/rtmpResourceLib/rtmpResourceLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xdf_sdkplayer.iml" filepath="$PROJECT_DIR$/xdf_sdkplayer.iml" />
     </modules>
   </component>
 </project>

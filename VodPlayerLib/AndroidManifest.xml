@@ -56,6 +56,15 @@
             android:windowSoftInputMode="adjustResize">
 
         </activity>
+
+        <activity
+            android:name="com.gensee.player.activity.PlSlidUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.gensee.player.activity.PlSlidUpHelpActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

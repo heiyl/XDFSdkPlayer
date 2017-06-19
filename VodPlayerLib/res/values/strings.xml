@@ -50,4 +50,10 @@
     <string name="speed_choice">选择播放速度</string>
     <string name="idcSwitch">网络切换</string>
     <string name="reword">打赏</string>
+
+    <string name="errcode_success">发送成功</string>
+    <string name="errcode_cancel">发送取消</string>
+    <string name="errcode_deny">发送被拒绝</string>
+    <string name="errcode_unsupported">不支持错误</string>
+    <string name="errcode_unknown">发送返回</string>
 </resources>

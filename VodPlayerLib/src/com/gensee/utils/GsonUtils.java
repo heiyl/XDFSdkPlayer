@@ -1,4 +1,4 @@
-package com.xdf.studybroad.tool;
+package com.gensee.utils;
 /**
  * json解析的工具类
  */

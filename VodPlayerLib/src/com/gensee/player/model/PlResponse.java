@@ -6,17 +6,17 @@ package com.gensee.player.model;
  * wuxu@xdf.cn
  */
 
-public class Response {
+public class PlResponse {
 
-    private boolean status;
+    private int status;
     private String result;
     private String info;
 
-    public boolean isStatus() {
-        return status;
+    public boolean getStatus() {
+        return status > 0;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
