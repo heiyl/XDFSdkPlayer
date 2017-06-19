@@ -1,7 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@drawable/mask_upward"
+    android:background="@drawable/xdf_video_top_bar_bg"
     android:orientation="horizontal"
     android:paddingLeft="15dp"
     android:paddingRight="15dp">
