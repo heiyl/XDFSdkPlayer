@@ -40,6 +40,7 @@ import com.gensee.utils.GenseeLog;
 import com.gensee.utils.StringUtil;
 import com.gensee.view.GSDocViewGx;
 import com.gensee.view.GSVideoView;
+import com.gensee.vod.model.ChapterInfo;
 
 public class PlayActivity extends Activity implements OnDocViewEventListener,
 		OnVodPlayListener, OnClickListener, OnSeekBarChangeListener {

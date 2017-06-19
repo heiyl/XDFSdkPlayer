@@ -1,6 +1,5 @@
 package com.gensee.vod.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,8 +33,6 @@ import com.gensee.entity.DocInfo;
 import com.gensee.entity.InitParam;
 import com.gensee.entity.QAMsg;
 import com.gensee.entity.VodObject;
-import com.gensee.fragement.ChatFragment;
-import com.gensee.fragement.DocFragment;
 import com.gensee.media.PlaySpeed;
 import com.gensee.media.VODPlayer;
 import com.gensee.player.adapter.ViewPagerAdapter;
@@ -51,7 +48,7 @@ import com.gensee.vod.VodSite.OnVodListener;
 import com.gensee.vod.fragment.VodChapterFragment;
 import com.gensee.vod.fragment.VodChatHistoryFragment;
 import com.gensee.vod.fragment.VodDocFragment;
-import com.gensee.voddemo.ChapterInfo;
+import com.gensee.vod.model.ChapterInfo;
 
 import java.util.ArrayList;
 import java.util.List;

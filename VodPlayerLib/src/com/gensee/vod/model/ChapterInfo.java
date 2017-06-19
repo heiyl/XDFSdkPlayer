@@ -1,4 +1,4 @@
-package com.gensee.voddemo;
+package com.gensee.vod.model;
 
 public class ChapterInfo {
 	private int pageTimeStamp;

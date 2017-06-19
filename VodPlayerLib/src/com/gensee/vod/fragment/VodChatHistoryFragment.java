@@ -7,17 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gensee.entity.ChatMsg;
-import com.gensee.entity.DocInfo;
-import com.gensee.entity.PageInfo;
 import com.gensee.media.VODPlayer;
 import com.gensee.playerdemo.R;
-import com.gensee.voddemo.ChapterInfo;
 
 import java.util.ArrayList;
 import java.util.List;

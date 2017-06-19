@@ -16,8 +16,7 @@ import com.gensee.entity.DocInfo;
 import com.gensee.entity.PageInfo;
 import com.gensee.media.VODPlayer;
 import com.gensee.playerdemo.R;
-import com.gensee.view.GSDocViewGx;
-import com.gensee.voddemo.ChapterInfo;
+import com.gensee.vod.model.ChapterInfo;
 
 import java.util.ArrayList;
 import java.util.List;
