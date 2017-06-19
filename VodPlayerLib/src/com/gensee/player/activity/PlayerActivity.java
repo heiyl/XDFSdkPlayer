@@ -426,15 +426,19 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
                 break;
             case JOIN_RTMP_FAILED:
                 msg = "连接服务器失败";
+                mHandler.sendEmptyMessage(HANDlER.CONNECTFAIL);
                 break;
             case JOIN_TOO_EARLY:
                 msg = "直播还未开始";
+                mHandler.sendEmptyMessage(HANDlER.CONNECTFAIL);
                 break;
             case JOIN_LICENSE:
                 msg = "人数已满";
+                mHandler.sendEmptyMessage(HANDlER.CONNECTFAIL);
                 break;
             default:
                 msg = "加入返回错误" + result;
+                mHandler.sendEmptyMessage(HANDlER.CONNECTFAIL);
                 break;
         }
         showTip(false, "");
@@ -770,7 +774,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
     @Override
     public void onPageSize(int pos, int w, int h) {
         //文档开始显示
-        toastMsg("文档分辨率 w = " + w + " h = " + h);
+//        toastMsg("文档分辨率 w = " + w + " h = " + h);
     }
 
     /**
@@ -972,7 +976,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
     @Override
     public void onVideoSize(int width, int height, boolean iaAs) {
         GenseeLog.d(TAG, "onVideoSize");
-        toastMsg("onVideoSize width = " + width + " height = " + height + " isAs = " + iaAs);
+//        toastMsg("onVideoSize width = " + width + " height = " + height + " isAs = " + iaAs);
     }
 
     @Override
@@ -982,7 +986,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
 
     @Override
     public void onScreenStatus(boolean isAs) {
-        toastMsg("onScreenStatus isAs = " + isAs);
+//        toastMsg("onScreenStatus isAs = " + isAs);
     }
 
     @Override
