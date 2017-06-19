@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_slid_up_view_help"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    tools:showIn="@layout/activity_pl_slid_up_help">
+
+    <RelativeLayout
+        android:id="@+id/rl_slideView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_up_corners_bg"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:padding="18dp"
+            android:src="@drawable/delete" />
+
+        <LinearLayout
+            android:id="@+id/ll_help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="40dp"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="课堂助手"
+                android:textColor="@color/app_color_text_black_first"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="1.为什么听不到老师的声音？"
+                android:textColor="@color/app_color_text_black_first"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="第一步：直播开始前可点击“开课提醒”获得开课通知，收到通知后点击链接即可听直播\n第二步：建议在WIFI环境下观看直播，播放顺畅不卡顿"
+                android:textColor="@color/app_color_text_black_second"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="2.视频卡顿怎么解决？"
+                android:textColor="@color/app_color_text_black_first"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="第一步：直播开始前可点击“开课提醒”获得开课通知，收到通知后点击链接即可听直播\n第二步：建议在WIFI环境下观看直播，播放顺畅不卡顿"
+                android:textColor="@color/app_color_text_black_second"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="3.直播时为什么会有延迟现象？"
+                android:textColor="@color/app_color_text_black_first"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="第一步：直播开始前可点击“开课提醒”获得开课通知，收到通知后点击链接即可听直播\n第二步：建议在WIFI环境下观看直播，播放顺畅不卡顿"
+                android:textColor="@color/app_color_text_black_second"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>
