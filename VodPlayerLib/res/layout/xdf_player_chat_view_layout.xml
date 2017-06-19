@@ -52,9 +52,8 @@
                 android:gravity="center"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:padding="@dimen/chat_bottom_padding" >
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp">
 
                 <TextView
                     android:id="@+id/chat_to_tv"
@@ -98,13 +97,14 @@
                             android:id="@+id/edittalking"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:minHeight="39dp"
+                            android:minHeight="35dp"
                             android:layout_weight="1"
                             android:background="@drawable/xdf_chat_edit_bg"
                             android:gravity="center_vertical"
                             android:maxLines="2"
                             android:orientation="horizontal"
-                            android:paddingLeft="5dp"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
                             android:textColor="@color/chat_edit_view"
                             android:textSize="@dimen/chat_editview_context" />
 
@@ -115,10 +115,10 @@
                     android:id="@+id/sendbutton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:paddingTop="6dp"
+                    android:paddingBottom="6dp"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="10dp"
                     android:text="发送"

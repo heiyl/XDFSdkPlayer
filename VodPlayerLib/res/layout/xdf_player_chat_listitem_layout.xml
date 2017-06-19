@@ -44,6 +44,7 @@
         android:layout_alignLeft="@id/chatnametext"
         android:layout_below="@id/chatnametext"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="13dp"
         android:textColor="@color/app_color_text_black_first"
         android:textSize="@dimen/chat_listview_context"
         android:background="@drawable/chat_receiver_teacher_bg"/>
