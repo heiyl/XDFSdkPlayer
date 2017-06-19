@@ -24,7 +24,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.EditText;
 
-import com.gensee.playerdemo.R;
+import com.gensee.R;
+
 
 public class EditTextWithDel extends EditText {
 

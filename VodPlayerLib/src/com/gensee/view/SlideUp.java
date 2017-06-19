@@ -19,7 +19,8 @@ import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 
-import com.gensee.playerdemo.R;
+
+import com.gensee.R;
 
 import java.io.Serializable;
 import java.lang.annotation.Retention;

@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.gensee.R;
 import com.gensee.player.activity.PlayerActivity;
-import com.gensee.playerdemo.R;
 import com.gensee.vod.activity.VodPlayerActivity;
 
 public class MainActivity extends Activity {

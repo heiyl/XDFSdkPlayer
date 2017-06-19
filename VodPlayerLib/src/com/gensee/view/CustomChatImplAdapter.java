@@ -4,8 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.gensee.R;
 import com.gensee.adapter.AbstractViewHolder;
-import com.gensee.playerdemo.R;
 
 public class CustomChatImplAdapter extends CustomAbsChatAdapter {
 

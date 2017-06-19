@@ -10,9 +10,9 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gensee.R;
 import com.gensee.entity.ChatMsg;
 import com.gensee.media.VODPlayer;
-import com.gensee.playerdemo.R;
 
 import java.util.ArrayList;
 import java.util.List;

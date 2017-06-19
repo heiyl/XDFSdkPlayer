@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gensee.R;
 import com.gensee.player.model.PlResponse;
-import com.gensee.playerdemo.R;
 import com.gensee.utils.GsonUtils;
 import com.gensee.view.SlideUp;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;

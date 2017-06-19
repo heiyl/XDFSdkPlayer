@@ -11,12 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.gensee.R;
 import com.gensee.pdu.AnnoFreepenEx;
 import com.gensee.pdu.AnnoPointerEx;
 import com.gensee.player.Player;
 import com.gensee.player.activity.PlSlidUpActivity;
 import com.gensee.player.activity.PlSlidUpHelpActivity;
-import com.gensee.playerdemo.R;
 import com.gensee.view.GSDocViewGx;
 
 @SuppressLint("ValidFragment")

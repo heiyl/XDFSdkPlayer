@@ -5,12 +5,12 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.gensee.R;
 import com.gensee.adapter.AbsGridViewAvatarAdapter;
 import com.gensee.adapter.SelectAvatarInterface;
 import com.gensee.entity.UserInfo;
 import com.gensee.holder.chat.ExpressionResource;
 import com.gensee.player.Player;
-import com.gensee.playerdemo.R;
 import com.gensee.view.AbsChatToPopView.InterfaceSelarctorName;
 
 import java.util.List;

@@ -5,13 +5,13 @@
     android:paddingLeft="15dp"
     android:paddingRight="15dp">
 
-    <ImageButton
+    <ImageView
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:id="@+id/pauseresumeplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_play" />
+        android:src="@drawable/icon_pause" />
 
     <ImageView
         android:id="@+id/iv_screen"
@@ -59,9 +59,13 @@
             android:id="@+id/seekbarpalyviedo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxHeight="2.0dip"
+            android:minHeight="2.0dip"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:progress="0" />
+            android:progress="0"
+            android:progressDrawable="@drawable/po_seekbar"
+            android:thumb="@drawable/seekbar_bg" />
     </LinearLayout>
 
 </RelativeLayout>

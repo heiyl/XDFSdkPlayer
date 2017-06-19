@@ -5,7 +5,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.gensee.playerdemo.R;
+import com.gensee.R;
 import com.gensee.view.SlideUp;
 
 public class PlSlidUpHelpActivity extends PlSlidUpActivity {

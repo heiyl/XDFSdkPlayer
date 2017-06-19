@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -27,6 +26,7 @@ import android.widget.Toast;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.gensee.R;
 import com.gensee.common.ServiceType;
 import com.gensee.entity.ChatMsg;
 import com.gensee.entity.DocInfo;
@@ -37,7 +37,6 @@ import com.gensee.media.PlaySpeed;
 import com.gensee.media.VODPlayer;
 import com.gensee.player.adapter.ViewPagerAdapter;
 import com.gensee.player.LogCatService;
-import com.gensee.playerdemo.R;
 import com.gensee.taskret.OnTaskRet;
 import com.gensee.utils.DensityUtil;
 import com.gensee.utils.GenseeLog;
@@ -76,7 +75,7 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
     private SeekBar mSeekBarPlayViedo;
     private TextView mNowTimeTextview;
     private TextView mAllTimeTextView;
-    private ImageButton mPauseScreenplay;
+    private ImageView mPauseScreenplay;
 
     private LinearLayout llt_bottom;
     private ImageView iv_screen;
@@ -167,7 +166,7 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
 
         lastPostion = getPreferences(MODE_PRIVATE).getInt("lastPos", 0);
         mSeekBarPlayViedo = (SeekBar) findViewById(R.id.seekbarpalyviedo);
-        mPauseScreenplay = (ImageButton) findViewById(R.id.pauseresumeplay);
+        mPauseScreenplay = (ImageView) findViewById(R.id.pauseresumeplay);
         mNowTimeTextview = (TextView) findViewById(R.id.palynowtime);
         mAllTimeTextView = (TextView) findViewById(R.id.palyalltime);
 

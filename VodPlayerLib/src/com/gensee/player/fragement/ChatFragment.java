@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gensee.R;
 import com.gensee.entity.UserInfo;
 import com.gensee.player.Player;
-import com.gensee.playerdemo.R;
 import com.gensee.view.CustomGSImplChatView;
 
 @SuppressLint("ValidFragment")

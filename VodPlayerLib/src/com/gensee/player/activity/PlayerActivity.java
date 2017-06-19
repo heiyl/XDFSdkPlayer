@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.gensee.R;
 import com.gensee.common.ServiceType;
 import com.gensee.config.ConfigApp;
 import com.gensee.entity.InitParam;
@@ -39,7 +40,6 @@ import com.gensee.player.Player;
 import com.gensee.player.adapter.ViewPagerAdapter;
 import com.gensee.player.fragement.ChatFragment;
 import com.gensee.player.fragement.DocFragment;
-import com.gensee.playerdemo.R;
 import com.gensee.taskret.OnTaskRet;
 import com.gensee.utils.DensityUtil;
 import com.gensee.utils.GenseeLog;

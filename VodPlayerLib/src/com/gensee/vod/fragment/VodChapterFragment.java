@@ -12,10 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.gensee.R;
 import com.gensee.entity.DocInfo;
 import com.gensee.entity.PageInfo;
 import com.gensee.media.VODPlayer;
-import com.gensee.playerdemo.R;
 import com.gensee.vod.model.ChapterInfo;
 
 import java.util.ArrayList;

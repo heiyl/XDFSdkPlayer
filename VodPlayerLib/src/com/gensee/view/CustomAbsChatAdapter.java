@@ -9,13 +9,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gensee.R;
 import com.gensee.adapter.AbsChatAdapter;
 import com.gensee.entity.chat.AbsChatMessage;
 import com.gensee.entity.chat.PrivateMessage;
 import com.gensee.entity.chat.PublicMessage;
 import com.gensee.entity.chat.SysMessage;
 import com.gensee.holder.chat.impl.MsgQueue;
-import com.gensee.playerdemo.R;
 
 public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
     private Context mContext;
