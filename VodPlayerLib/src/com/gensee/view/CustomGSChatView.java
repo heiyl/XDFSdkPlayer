@@ -680,7 +680,7 @@ public abstract class CustomGSChatView extends GSChatView{
         protected void initView(View view) {
             super.initView(view);
             View headerView = LayoutInflater.from(CustomGSChatView.this.getContext()).inflate(CustomGSChatView.this.getChatLvHeadViewId(), (ViewGroup)null);
-            this.lvChat.addHeaderView(headerView);
+//            this.lvChat.addHeaderView(headerView);
             this.adapter = CustomGSChatView.this.getChatAdapter(CustomGSChatView.this.getContext());
             ((CustomAbsChatAdapter)this.adapter).setOnChatAdapterListener(CustomGSChatView.this);
             this.lvChat.setAdapter(this.adapter);
@@ -778,7 +778,7 @@ public abstract class CustomGSChatView extends GSChatView{
         protected void initView(View view) {
             super.initView(view);
             View headerView = LayoutInflater.from(CustomGSChatView.this.getContext()).inflate(CustomGSChatView.this.getChatLvHeadViewId(), (ViewGroup)null);
-            this.lvChat.addHeaderView(headerView);
+//            this.lvChat.addHeaderView(headerView);
             this.adapter = CustomGSChatView.this.getChatAdapter(CustomGSChatView.this.getContext());
             ((CustomAbsChatAdapter)this.adapter).setOnChatAdapterListener(CustomGSChatView.this);
             this.lvChat.setAdapter(this.adapter);
@@ -789,7 +789,7 @@ public abstract class CustomGSChatView extends GSChatView{
         }
 
         protected void show(boolean bVisible) {
-            this.rlQuerySelf.setVisibility(bVisible?0:8);
+            this.rlQuerySelf.setVisibility(bVisible?View.VISIBLE:View.GONE);
         }
 
         public void refreshMsg(int what, List<AbsChatMessage> msgList, boolean bLatest) {
