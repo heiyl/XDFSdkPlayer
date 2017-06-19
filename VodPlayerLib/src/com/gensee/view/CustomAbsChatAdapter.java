@@ -49,11 +49,13 @@ public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
             final AbsChatMessage mAbsChatMessage = (AbsChatMessage)CustomAbsChatAdapter.this.getItem(positon);
             if(mAbsChatMessage instanceof SysMessage) {
                 String mPublicMessage = CustomAbsChatAdapter.this.mContext.getResources().getString(this.getSysMsgTipId());
-                int mString = mPublicMessage.length();
+                /*int mString = mPublicMessage.length();
                 mPublicMessage = mPublicMessage + ((AbsChatMessage)CustomAbsChatAdapter.this.getItem(positon)).getRich();
                 SpannableStringBuilder num = new SpannableStringBuilder(mPublicMessage);
-                num.setSpan(new ForegroundColorSpan(CustomAbsChatAdapter.this.mContext.getResources().getColor(this.getSysMsgColorId())), 0, mString, 33);
-                this.mChatNameText.setText(num);
+                num.setSpan(new ForegroundColorSpan(CustomAbsChatAdapter.this.mContext.getResources().getColor(this.getSysMsgColorId())), 0, mString, 33);*/
+                this.mChatNameText.setText(mPublicMessage);
+                this.mMyTextViewEx.setBackgroundResource(R.drawable.chat_receiver_teacher_bg);
+                this.onTimeTextView(positon);
 //                this.mChatTimeText.setText(num);
             } else if(mAbsChatMessage instanceof PrivateMessage) {
                 this.onTimeTextViewGoneVis();
@@ -88,8 +90,16 @@ public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
                 PublicMessage mPublicMessage2 = (PublicMessage)mAbsChatMessage;
                 if(mPublicMessage2.getSendUserId() == CustomAbsChatAdapter.this.getSelfId()) {
                     this.mChatNameText.setText(CustomAbsChatAdapter.this.mContext.getResources().getString(this.getChatmeTipStrId()));
+                    this.mMyTextViewEx.setBackgroundResource(R.drawable.chat_receiver_self_bg);
                 } else {
                     this.mChatNameText.setText(mPublicMessage2.getSendUserName());
+                    AbsChatMessage item = (AbsChatMessage)CustomAbsChatAdapter.this.getItem(positon);
+                    if(item.getSenderRole() == 1 || item.getSenderRole() == 4 || item.getSenderRole() == 7){//组织者:1  嘉宾：4  观看者：8  web观看者：16
+                        this.mMyTextViewEx.setBackgroundResource(R.drawable.chat_receiver_teacher_bg);
+                    }else{
+                        this.mMyTextViewEx.setBackgroundResource(R.drawable.chat_receiver_other_bg);
+                    }
+
                 }
 
                 this.onTimeTextView(positon);
