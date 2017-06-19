@@ -1,4 +1,4 @@
-package com.gensee.playerdemo;
+package com.gensee.player;
 
 import android.app.Service;
 import android.content.Intent;

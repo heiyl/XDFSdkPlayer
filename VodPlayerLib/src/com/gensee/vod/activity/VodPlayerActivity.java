@@ -36,7 +36,7 @@ import com.gensee.entity.VodObject;
 import com.gensee.media.PlaySpeed;
 import com.gensee.media.VODPlayer;
 import com.gensee.player.adapter.ViewPagerAdapter;
-import com.gensee.playerdemo.LogCatService;
+import com.gensee.player.LogCatService;
 import com.gensee.playerdemo.R;
 import com.gensee.taskret.OnTaskRet;
 import com.gensee.utils.DensityUtil;

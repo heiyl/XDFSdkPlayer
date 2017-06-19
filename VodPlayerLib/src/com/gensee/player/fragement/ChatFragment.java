@@ -1,4 +1,4 @@
-package com.gensee.fragement;
+package com.gensee.player.fragement;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,7 +12,6 @@ import com.gensee.entity.UserInfo;
 import com.gensee.player.Player;
 import com.gensee.playerdemo.R;
 import com.gensee.view.CustomGSImplChatView;
-import com.gensee.view.GSImplChatView;
 
 @SuppressLint("ValidFragment")
 public class ChatFragment extends Fragment {

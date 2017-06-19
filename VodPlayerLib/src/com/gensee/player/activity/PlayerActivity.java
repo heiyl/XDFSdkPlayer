@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -20,15 +19,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flyco.tablayout.SlidingTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.gensee.adapter.UserListAdapter;
 import com.gensee.common.ServiceType;
 import com.gensee.config.ConfigApp;
 import com.gensee.entity.InitParam;
@@ -36,16 +32,13 @@ import com.gensee.entity.PayInfo;
 import com.gensee.entity.PingEntity;
 import com.gensee.entity.RewardResult;
 import com.gensee.entity.UserInfo;
-import com.gensee.fragement.ChatFragment;
-import com.gensee.fragement.DocFragment;
-import com.gensee.fragement.QaFragment;
-import com.gensee.fragement.ViedoFragment;
-import com.gensee.fragement.VoteFragment;
 import com.gensee.net.AbsRtAction;
+import com.gensee.player.LogCatService;
 import com.gensee.player.OnPlayListener;
 import com.gensee.player.Player;
 import com.gensee.player.adapter.ViewPagerAdapter;
-import com.gensee.playerdemo.LogCatService;
+import com.gensee.player.fragement.ChatFragment;
+import com.gensee.player.fragement.DocFragment;
 import com.gensee.playerdemo.R;
 import com.gensee.taskret.OnTaskRet;
 import com.gensee.utils.DensityUtil;
@@ -61,7 +54,7 @@ import java.util.List;
  * yulong
  */
 
-public class PlayerActivity extends FragmentActivity implements OnPlayListener,OnTabSelectListener,View.OnClickListener {
+public class PlayerActivity extends FragmentActivity implements OnPlayListener, OnTabSelectListener, View.OnClickListener {
 
     private static final String TAG = "PlayerActivity";
     private SharedPreferences preferences;
@@ -88,14 +81,6 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
     private RelativeLayout relTip;
     private TextView txtTip;
 
-    private UserListAdapter mChatAdapter;
-    private ListView mChatListview;
-    private ProgressBar mProgressBar;
-    private ChatFragment mChatFragment;
-    private DocFragment mDocFragment;
-    private ViedoFragment mViedoFragment;
-    private QaFragment mQaFragment;
-    private VoteFragment mVoteFragment;
 
     private ServiceType serviceType = ServiceType.TRAINING;
 
@@ -134,13 +119,10 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
             switch (msg.what) {
 
                 case HANDlER.USERINCREASE:
-                    mChatAdapter.addInfo((UserInfo) (msg.obj));
                     break;
                 case HANDlER.USERDECREASE:
-                    mChatAdapter.leaveInfo((UserInfo) (msg.obj));
                     break;
                 case HANDlER.USERUPDATE:
-                    mChatAdapter.addInfo((UserInfo) (msg.obj));
                     break;
                 case HANDlER.SUCCESSJOIN:
                     preferences.edit().putString(ConfigApp.PARAMS_DOMAIN, domain)
@@ -300,8 +282,8 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
     }
 
     public void initWidget() {
-        mStlTab = (SlidingTabLayout)findViewById(R.id.stl_tab);
-        mViewPager = (ViewPager)findViewById(R.id.viewPager);
+        mStlTab = (SlidingTabLayout) findViewById(R.id.stl_tab);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mStartpage = (LinearLayout) findViewById(R.id.startpage);
         llt_joining = (LinearLayout) findViewById(R.id.llt_joining);
         llt_state = (LinearLayout) findViewById(R.id.llt_state);
@@ -324,7 +306,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.iv_screen) {
+        if (v.getId() == R.id.iv_screen) {
             int orientation = getRequestedOrientation();
             if (orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
                     || orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
@@ -333,7 +315,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
                 orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
             }
             setRequestedOrientation(orientation);
-        }else if(v.getId() == R.id.tv_refresh) {
+        } else if (v.getId() == R.id.tv_refresh) {
             initInitParam();
         }
     }
@@ -609,79 +591,6 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
     }
 
 
-    private void processVideoFragment(FragmentTransaction ft) {
-        if (mViedoFragment == null) {
-            mViedoFragment = new ViedoFragment(mPlayer);
-            ft.add(R.id.fragement_update, mViedoFragment);
-        } else {
-            ft.show(mViedoFragment);
-        }
-
-        if (null != mViedoFragment) {
-            mViedoFragment.setVideoViewVisible(true);
-        }
-    }
-
-    private void processQaFragment(FragmentTransaction ft) {
-        if (mQaFragment == null) {
-            mQaFragment = new QaFragment(mPlayer);
-            ft.add(R.id.fragement_update, mQaFragment);
-        } else {
-            ft.show(mQaFragment);
-        }
-    }
-
-    private void processVoteFragment(FragmentTransaction ft) {
-        if (mVoteFragment == null) {
-            mVoteFragment = new VoteFragment(mPlayer);
-            ft.add(R.id.fragement_update, mVoteFragment);
-        } else {
-            ft.show(mVoteFragment);
-        }
-    }
-
-    private void processDocFragment(FragmentTransaction ft) {
-        if (mDocFragment == null) {
-            mDocFragment = new DocFragment(mPlayer);
-            ft.add(R.id.fragement_update, mDocFragment);
-        } else {
-            ft.show(mDocFragment);
-        }
-
-        if (null != mViedoFragment) {
-            mViedoFragment.setVideoViewVisible(false);
-        }
-    }
-
-    private void processChatFragment(FragmentTransaction ft) {
-        if (mChatFragment == null) {
-            mChatFragment = new ChatFragment(mPlayer);
-            ft.add(R.id.fragement_update, mChatFragment);
-        } else {
-            ft.show(mChatFragment);
-        }
-    }
-
-    public void hideFragment(FragmentTransaction ft) {
-
-        if (mViedoFragment != null) {
-            ft.hide(mViedoFragment);
-        }
-        if (mVoteFragment != null) {
-            ft.hide(mVoteFragment);
-        }
-        if (mChatFragment != null) {
-            ft.hide(mChatFragment);
-        }
-        if (mQaFragment != null) {
-            ft.hide(mQaFragment);
-        }
-        if (mDocFragment != null) {
-            ft.hide(mDocFragment);
-        }
-    }
-
-
     public void exit() {
         Intent mHomeIntent = new Intent(Intent.ACTION_MAIN);
         mHomeIntent.addCategory(Intent.CATEGORY_HOME);
@@ -749,9 +658,6 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
     @Override
     protected void onDestroy() {
         stopLogService();
-        if (null != mChatAdapter) {
-            mChatAdapter.clear();
-        }
         releasePlayer();
         // onFinshAll();
         super.onDestroy();
@@ -838,7 +744,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
         llt_bottom.setVisibility(View.VISIBLE);
         ViewGroup.LayoutParams params = mGSViedoView.getLayoutParams();
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.height = DensityUtil.dip2px(this,281);
+        params.height = DensityUtil.dip2px(this, 281);
         mGSViedoView.setLayoutParams(params);
     }
 
@@ -950,7 +856,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
                     @Override
                     public void run() {
 
-                        mViedoFragment.onMicColesed();
+//                        mViedoFragment.onMicColesed();
                     }
                 });
                 mPlayer.inviteAck(inviteMediaType, false, null);
@@ -960,7 +866,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener,O
 
                     @Override
                     public void run() {
-                        mViedoFragment.onMicOpened(inviteMediaType);
+//                        mViedoFragment.onMicOpened(inviteMediaType);
                     }
                 });
                 mPlayer.inviteAck(inviteMediaType, true, null);

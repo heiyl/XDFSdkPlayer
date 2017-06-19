@@ -3,7 +3,7 @@
     package="com.gensee.playerdemo"
     android:installLocation="preferExternal"
     android:versionCode="7"
-    android:versionName="3.1.0.68" >
+    android:versionName="3.1.0.68">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,47 +25,27 @@
         android:targetSdkVersion="21" />
 
     <application
-        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        
-         
-        
-        <activity
-            android:name=".PlayerDemoActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|adjustResize|stateHidden" >
-            
-        </activity>
+        android:largeHeap="true"
+        android:theme="@style/AppTheme">
 
         <service
-            android:name=".LogCatService"
-            android:process=":message" >
-        </service>
+            android:name="com.gensee.player.LogCatService"
+            android:process=":message"></service>
+
         <activity
-            android:name="com.gensee.voddemo.VodActivity"
-            android:screenOrientation="landscape"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name="com.gensee.voddemo.PlayActivity"
-            android:configChanges="orientation|screenLayout|screenSize"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
-        </activity>
+            android:name="com.gensee.player.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name="com.gensee.player.activity.PlayerActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="adjustPan">
 
         </activity>
         <activity
@@ -73,7 +53,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"  >
+            android:windowSoftInputMode="adjustResize">
 
         </activity>
     </application>

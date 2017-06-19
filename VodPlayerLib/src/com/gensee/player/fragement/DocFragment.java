@@ -1,4 +1,4 @@
-package com.gensee.fragement;
+package com.gensee.player.fragement;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;

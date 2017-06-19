@@ -1,4 +1,4 @@
-package com.gensee.playerdemo;
+package com.gensee.player;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.gensee.player.activity.PlayerActivity;
+import com.gensee.playerdemo.R;
 import com.gensee.vod.activity.VodPlayerActivity;
-import com.gensee.voddemo.VodActivity;
 
 public class MainActivity extends Activity {
 

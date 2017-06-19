@@ -23,7 +23,8 @@
         android:paddingRight="30dp"
         android:layout_toRightOf="@id/iv_photo"
         android:text="@string/sytsemmesg"
-        android:textSize="@dimen/chat_listview_name"/>
+        android:textColor="@color/app_color_text_black_first"
+        android:textSize="12sp"/>
 
     <TextView
         android:id="@+id/chattimetext"
@@ -34,8 +35,8 @@
         android:layout_marginRight="@dimen/chat_listview_time_right"
         android:layout_toRightOf="@id/chatnametext"
         android:text="@string/displaytime"
-        android:textColor="@color/chat_system_message"
-        android:textSize="@dimen/chat_listview_time"/>
+        android:textColor="@color/app_color_text_black_third"
+        android:textSize="12sp"/>
 
     <com.gensee.view.MyTextViewEx
         android:id="@+id/chatcontexttextview"
@@ -44,7 +45,7 @@
         android:layout_alignLeft="@id/chatnametext"
         android:layout_below="@id/chatnametext"
         android:layout_marginTop="5dp"
-        android:textColor="@color/chat_select_self"
+        android:textColor="@color/app_color_text_black_first"
         android:textSize="@dimen/chat_listview_context"
         android:background="@drawable/chat_receiver_teacher_bg"/>
 
