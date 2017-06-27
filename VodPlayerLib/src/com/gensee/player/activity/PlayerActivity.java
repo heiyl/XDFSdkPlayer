@@ -10,7 +10,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -40,16 +40,19 @@ import com.gensee.net.AbsRtAction;
 import com.gensee.player.LogCatService;
 import com.gensee.player.OnPlayListener;
 import com.gensee.player.Player;
+import com.gensee.player.VideoRate;
 import com.gensee.player.adapter.ViewPagerAdapter;
 import com.gensee.player.fragement.ChatFragment;
 import com.gensee.player.fragement.DocFragment;
 import com.gensee.taskret.OnTaskRet;
 import com.gensee.utils.DensityUtil;
 import com.gensee.utils.GenseeLog;
+import com.gensee.utils.LogUtils;
 import com.gensee.view.GSVideoView;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * 直播页面
@@ -60,21 +63,21 @@ import java.util.List;
 public class PlayerActivity extends FragmentActivity implements OnPlayListener, OnTabSelectListener, View.OnClickListener {
 
     private static final String TAG = "PlayerActivity";
-    MyOrientoinListener myOrientoinListener;
+    //    private MyOrientoinListener myOrientoinListener;
     private SharedPreferences preferences;
     private Player mPlayer;
     private GSVideoView mGSViedoView;
 
-    SlidingTabLayout mStlTab;
-    ViewPager mViewPager;
+    private SlidingTabLayout mStlTab;
+    private ViewPager mViewPager;
 
-    LinearLayout mStartpage;
-    LinearLayout llt_joining;
-    LinearLayout llt_state;
-    TextView tv_refresh;
+    private LinearLayout mStartpage;
+    private LinearLayout llt_joining;
+    private LinearLayout llt_state;
+    private TextView tv_refresh;
 
-    ImageView iv_screen;
-    LinearLayout llt_bottom;
+    private ImageView iv_back, iv_screen;
+    private LinearLayout llt_bottom;
 
     private boolean isFullScreen;
 
@@ -84,6 +87,10 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
 
     private RelativeLayout relTip;
     private TextView txtTip;
+
+    private TextView tv_peoplecount;
+    private ImageView iv_transmit;
+    private boolean isVideo = true;
 
 
     private ServiceType serviceType = ServiceType.TRAINING;
@@ -95,13 +102,16 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
     private AlertDialog dialog;
     private int inviteMediaType;
 
+    private DocFragment docFragment;
+    private ChatFragment chatFragment;
 
-    String domain = "xdfjt.gensee.com";
-    String number = "99310246";
-    String account = "";
-    String accountPwd = "";
-    String joinPwd = "372601";
-    String nickName = "fastsdk_test_android";
+    private String domain = "";
+    private String number = "";
+    private String account = "";
+    private String accountPwd = "";
+    private String joinPwd = "";
+    private String nickName = "";
+    private String courseId = "";
 
     interface HANDlER {
         int USERINCREASE = 1;
@@ -219,18 +229,18 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-
-        myOrientoinListener = new MyOrientoinListener(this);
-        boolean autoRotateOn = (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
-        //检查系统是否开启自动旋转
-        if (autoRotateOn) {
-            myOrientoinListener.enable();
-        }
-
+//注释掉自动横竖屏，有需要再打开
+//        myOrientoinListener = new MyOrientoinListener(this);
+//        boolean autoRotateOn = (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
+//        //检查系统是否开启自动旋转
+//        if (autoRotateOn) {
+//            myOrientoinListener.enable();
+//        }
         setContentView(R.layout.xdf_player_activity);
-        preferences = getPreferences(MODE_PRIVATE);
+        initData();
         startLogService();
         initWidget();
+        bindListener();
         bindViewPager();
         mHandler.postDelayed(new Runnable() {
 
@@ -240,6 +250,21 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
                 initInitParam();
             }
         }, 1500);
+
+        LogUtils.e(TAG, "onCreate");
+    }
+
+    private void initData() {
+        Intent intent = getIntent();
+        domain = intent.getStringExtra("domain");
+        account = intent.getStringExtra("account");
+        accountPwd = intent.getStringExtra("accPwd");
+        nickName = intent.getStringExtra("nickName");
+        number = intent.getStringExtra("number");
+        joinPwd = intent.getStringExtra("joinPwd");
+        courseId = intent.getStringExtra("courseId");
+
+        preferences = getPreferences(MODE_PRIVATE);
     }
 
     private boolean isNumber(String number) {
@@ -294,42 +319,77 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
     }
 
     public void initWidget() {
+
+        iv_back = (ImageView) findViewById(R.id.iv_back);
         mStlTab = (SlidingTabLayout) findViewById(R.id.stl_tab);
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
         mStartpage = (LinearLayout) findViewById(R.id.startpage);
         llt_joining = (LinearLayout) findViewById(R.id.llt_joining);
         llt_state = (LinearLayout) findViewById(R.id.llt_state);
         tv_refresh = (TextView) findViewById(R.id.tv_refresh);
-        tv_refresh.setOnClickListener(this);
-
         iv_screen = (ImageView) findViewById(R.id.iv_screen);
         llt_bottom = (LinearLayout) findViewById(R.id.llt_bottom);
-        iv_screen.setOnClickListener(this);
-
-
         relTip = (RelativeLayout) findViewById(R.id.rl_tip);
         txtTip = (TextView) findViewById(R.id.tv_tip);
+        iv_transmit = (ImageView) findViewById(R.id.iv_transmit);
+        tv_peoplecount = (TextView) findViewById(R.id.tv_peoplecount);
 
         mPlayer = new Player();
-
         mGSViedoView = (GSVideoView) findViewById(R.id.impvoteview);
         mPlayer.setGSVideoView(mGSViedoView);
+
+        mPlayer.switchRate(VideoRate.RATE_NORMAL, null);
+        iv_transmit.setBackground(isVideo ? getResources().getDrawable(R.drawable.icon_transmit) : getResources().getDrawable(R.drawable.icon_video));
+    }
+
+    private void bindListener() {
+        iv_back.setOnClickListener(this);
+        tv_refresh.setOnClickListener(this);
+        iv_transmit.setOnClickListener(this);
+        iv_screen.setOnClickListener(this);
+        mGSViedoView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doubleClick();
+            }
+        });
+    }
+
+    private long[] mHits = new long[2];
+
+    private void doubleClick() {
+        System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+        mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+        if (mHits[mHits.length - 1] - mHits[0] < 500) {
+            switchFullScreen();
+        }
     }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_screen) {
-            int orientation = getRequestedOrientation();
-            if (orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
-                    || orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE;
-            } else {
-                orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
-            }
-            setRequestedOrientation(orientation);
+            switchFullScreen();
         } else if (v.getId() == R.id.tv_refresh) {
             initInitParam();
+        } else if (v.getId() == R.id.iv_back) {
+            this.onBackPressed();
+        } else if (v.getId() == R.id.iv_transmit) {
+            isVideo = !isVideo;
+            mGSViedoView.setBackground(isVideo ? null : getResources().getDrawable(R.drawable.uoice_bj));
+            mPlayer.videoSet(isVideo);
+            iv_transmit.setBackground(isVideo ? getResources().getDrawable(R.drawable.icon_transmit) : getResources().getDrawable(R.drawable.icon_video));
         }
+    }
+
+    private void switchFullScreen() {
+        int orientation = getRequestedOrientation();
+        if (orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
+                || orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE;
+        } else {
+            orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
+        }
+        setRequestedOrientation(orientation);
     }
 
     public void bindViewPager() {
@@ -342,8 +402,12 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
         mTagList.clear();
         mTagList.add("文档");
         mTagList.add("聊天");
-        mFragmentList.add(new DocFragment(mPlayer));
-        mFragmentList.add(new ChatFragment(mPlayer));
+
+        docFragment = new DocFragment(mPlayer);
+        chatFragment = new ChatFragment(mPlayer);
+
+        mFragmentList.add(docFragment);
+        mFragmentList.add(chatFragment);
 
         mPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mFragmentList);
         mViewPager.setAdapter(mPagerAdapter);
@@ -373,6 +437,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
 //			mPlayer.audioSet(false);
 //			mPlayer.videoSet(false);
 //		}
+        LogUtils.e(TAG, "onResume");
     }
 
     @Override
@@ -382,6 +447,7 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
 //			mPlayer.audioSet(true);
 //			mPlayer.videoSet(true);
 //		}
+        LogUtils.e(TAG, "onPause");
     }
 
     public void initPlayer(InitParam p) {
@@ -445,16 +511,33 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
         toastMsg(msg);
     }
 
+    private int userCount = 1;
+
     @Override
     public void onUserJoin(UserInfo info) {
         // 用户加入
         mHandler.sendMessage(mHandler.obtainMessage(HANDlER.USERINCREASE, info));
+//        if (info != null) {
+//            userCount++;
+//        }
+//        setLiveUserCount(userCount);
+//        LogUtils.e(TAG, "在线人数 onUserJoin = " + userCount);
     }
 
     @Override
     public void onUserLeave(UserInfo info) {
         // 用户离开
         mHandler.sendMessage(mHandler.obtainMessage(HANDlER.USERDECREASE, info));
+//        if (info != null) {
+//            userCount--;
+//        }
+//        setLiveUserCount(userCount);
+//        LogUtils.e(TAG, "在线人数 onUserLeave = " + userCount);
+    }
+
+    private void setLiveUserCount(int count) {
+        if (count > 1)
+            tv_peoplecount.setText("观看人数：" + count);
     }
 
     @Override
@@ -528,6 +611,9 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
      */
     @Override
     public void onDocSwitch(int docType, String docName) {
+        if (docFragment != null) {
+            docFragment.onDocSwitch(docType, docName);
+        }
     }
 
     /**
@@ -677,8 +763,9 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
         releasePlayer();
         // onFinshAll();
         //销毁时取消监听
-        myOrientoinListener.disable();
+//        myOrientoinListener.disable();
         super.onDestroy();
+        LogUtils.e(TAG, "onDestroy");
     }
 
     private void releasePlayer() {
@@ -687,7 +774,6 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
             mPlayer.release(this);
             bJoinSuccess = false;
         }
-
     }
 
     private void showErrorMsg(final String sMsg) {
@@ -792,7 +878,8 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
      * @param total
      */
     public void onRosterTotal(int total) {
-        GenseeLog.d(TAG, "onRosterTotal total = " + total);
+        LogUtils.e(TAG, "在线人数 total = " + total);
+        setLiveUserCount(total);
     }
 
     /**
@@ -1041,16 +1128,16 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
             int screenOrientation = getResources().getConfiguration().orientation;
             if (((orientation >= 0) && (orientation < 45)) || (orientation > 315)) {//设置竖屏
                 if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT && orientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
-                    Log.d(TAG, "设置竖屏");
+                    LogUtils.d(TAG, "设置竖屏");
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 }
             } else if (orientation > 225 && orientation < 315) { //设置横屏
-                Log.d(TAG, "设置横屏");
+                LogUtils.d(TAG, "设置横屏");
                 if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                 }
             } else if (orientation > 45 && orientation < 135) {// 设置反向横屏
-                Log.d(TAG, "反向横屏");
+                LogUtils.d(TAG, "反向横屏");
                 if (screenOrientation != ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
                 }

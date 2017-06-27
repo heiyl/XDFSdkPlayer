@@ -6,7 +6,6 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gensee.R;
@@ -15,7 +14,8 @@ import com.gensee.entity.chat.AbsChatMessage;
 import com.gensee.entity.chat.PrivateMessage;
 import com.gensee.entity.chat.PublicMessage;
 import com.gensee.entity.chat.SysMessage;
-import com.gensee.holder.chat.impl.MsgQueue;
+import com.gensee.utils.DateUtils;
+import com.gensee.utils.LogUtils;
 
 public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
     private Context mContext;
@@ -104,12 +104,14 @@ public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
 
                 this.onTimeTextView(positon);
             }
-
         }
 
         public void onTimeTextView(int positon) {
             this.mCurrentTime = ((AbsChatMessage)CustomAbsChatAdapter.this.getItem(positon)).getTime() / 1000L;
-            this.mChatTimeText.setText(String.format("%02d", new Object[]{Long.valueOf((this.mCurrentTime / 3600L % 24L + 8L) % 24L)}) + ":" + String.format("%02d", new Object[]{Long.valueOf(this.mCurrentTime % 3600L / 60L)}) + ":" + String.format("%02d", new Object[]{Long.valueOf(this.mCurrentTime % 3600L % 60L)}));
+            String chatTime =  DateUtils.timeFormate(mCurrentTime);
+            this.mChatTimeText.setText(chatTime);
+            LogUtils.e("chatTime", "--- time----" + mCurrentTime);
+//            this.mChatTimeText.setText(String.format("%02d", new Object[]{Long.valueOf((this.mCurrentTime / 3600L % 24L + 8L) % 24L)}) + ":" + String.format("%02d", new Object[]{Long.valueOf(this.mCurrentTime % 3600L / 60L)}) + ":" + String.format("%02d", new Object[]{Long.valueOf(this.mCurrentTime % 3600L % 60L)}));
             this.mMyTextViewEx.setRichText(((AbsChatMessage)CustomAbsChatAdapter.this.getItem(positon)).getRich());
         }
 

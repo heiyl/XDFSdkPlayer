@@ -11,7 +11,7 @@
         android:id="@+id/rl_slideView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="200dp"
         android:background="@drawable/rounded_up_corners_bg"
         android:visibility="gone">
 
@@ -35,24 +35,24 @@
             android:visibility="gone">
 
             <TextView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_group_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="40dp"
                 android:gravity="center"
                 android:text="高一美本留学答疑群"
                 android:textColor="@color/app_color_text_black_third"
                 android:textSize="15sp" />
 
             <ImageView
-                android:id="@+id/iv_qrcode"
+                android:id="@+id/iv_group_qrcode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/default_qrcode" />
 
             <TextView
-                android:id="@+id/tv_msg"
+                android:id="@+id/tv_group_msg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="0dp"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="40dp"
@@ -92,7 +92,7 @@
                 android:textSize="14sp" />
 
             <com.gensee.view.EditTextWithDel
-                android:id="@+id/user_phone"
+                android:id="@+id/et_user_phone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginTop="40dp"

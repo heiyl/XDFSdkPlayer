@@ -5,11 +5,12 @@ import android.text.TextUtils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class DateTimeUtils {
+public class DateUtils {
     private static final ThreadLocal<DateFormat> ISO8601Format = new ThreadLocal() {
         protected DateFormat initialValue() {
             return new SimpleDateFormat("yyyy-MM-dd\'T\'HH:mm:ssZ", Locale.US);
@@ -29,7 +30,7 @@ public class DateTimeUtils {
     private static final SimpleDateFormat monthFormater = new SimpleDateFormat("MM月dd日 HH:mm");
     private static final SimpleDateFormat hourFormater = new SimpleDateFormat("HH:mm");
 
-    private DateTimeUtils() {
+    private DateUtils() {
         throw new AssertionError();
     }
 
@@ -98,28 +99,6 @@ public class DateTimeUtils {
                     }
                 }
             }
-        }
-    }
-
-    public static String timeFormate(Long timeStamp) {
-
-        long curTime = System.currentTimeMillis() / (long) 1000;
-        long time = curTime - timeStamp;
-
-        if (time < 60 && time >= 0) {
-            return "刚刚";
-        } else if (time >= 60 && time < 3600) {
-            return time / 60 + "分钟前";
-        } else if (time >= 3600 && time < 3600 * 24) {
-            return time / 3600 + "小时前";
-        } else if (time >= 3600 * 24 && time < 3600 * 24 * 30) {
-            return time / 3600 / 24 + "天前";
-        } else if (time >= 3600 * 24 * 30 && time < 3600 * 24 * 30 * 12) {
-            return time / 3600 / 24 / 30 + "个月前";
-        } else if (time >= 3600 * 24 * 30 * 12) {
-            return time / 3600 / 24 / 30 / 12 + "年前";
-        } else {
-            return timeStampToStr(timeStamp);
         }
     }
 
@@ -223,6 +202,30 @@ public class DateTimeUtils {
     }
 
     /**
+     * 得到昨天的日期
+     *
+     * @return
+     */
+    public static String getYestoryDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String yestoday = sdf.format(calendar.getTime());
+        return yestoday;
+    }
+
+    /**
+     * 得到今天的日期
+     *
+     * @return
+     */
+    public static String getTodayDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date());
+        return date;
+    }
+
+    /**
      * 时间戳转化为时间格式
      *
      * @param timeStamp
@@ -244,4 +247,25 @@ public class DateTimeUtils {
         return hourFormater.format(stamp);
     }
 
+    public static String timeFormate(Long timeStamp) {
+
+        long curTime = System.currentTimeMillis() / (long) 1000;
+        long time = curTime - timeStamp;
+
+        if (time < 60 && time >= 0) {
+            return "刚刚";
+        } else if (time >= 60 && time < 3600) {
+            return time / 60 + "分钟前";
+        } else if (time >= 3600 && time < 3600 * 24) {
+            return time / 3600 + "小时前";
+        } else if (time >= 3600 * 24 && time < 3600 * 24 * 30) {
+            return time / 3600 / 24 + "天前";
+        } else if (time >= 3600 * 24 * 30 && time < 3600 * 24 * 30 * 12) {
+            return time / 3600 / 24 / 30 + "个月前";
+        } else if (time >= 3600 * 24 * 30 * 12) {
+            return time / 3600 / 24 / 30 / 12 + "年前";
+        } else {
+            return timeStampToStr(timeStamp);
+        }
+    }
 }

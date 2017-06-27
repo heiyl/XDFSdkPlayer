@@ -1,7 +1,47 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_color_backgroud">
+    android:background="@color/app_color_backgroud"
+    android:orientation="vertical">
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_top"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="52dp"-->
+        <!--android:orientation="vertical"-->
+        <!--android:visibility="gone">-->
+
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="42dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:background="@color/white">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/tv_lession_time"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:text="4月24日 20：00-21：00"-->
+                <!--android:textColor="@color/app_color_text_black_first"-->
+                <!--android:textSize="13sp" />-->
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1px"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:background="@color/app_color_diver"-->
+                <!--android:paddingBottom="-1px" />-->
+        <!--</RelativeLayout>-->
+
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:background="@color/app_color_diver" />-->
+    <!--</RelativeLayout>-->
 
     <ListView
         android:id="@+id/doc_lv"
@@ -10,4 +50,5 @@
         android:background="@color/app_color_backgroud"
         android:cacheColorHint="@color/transparent"
         android:divider="@null" />
-</FrameLayout>
+
+</LinearLayout>

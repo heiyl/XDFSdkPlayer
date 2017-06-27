@@ -2,7 +2,6 @@ package com.gensee.vod.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,12 +12,16 @@ import android.widget.TextView;
 import com.gensee.R;
 import com.gensee.entity.ChatMsg;
 import com.gensee.media.VODPlayer;
+import com.gensee.player.fragement.BaseFragment;
+import com.gensee.utils.DateUtils;
+import com.gensee.utils.LogUtils;
+import com.gensee.view.MyTextViewEx;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ValidFragment")
-public class VodChatHistoryFragment extends Fragment {
+public class VodChatHistoryFragment extends BaseFragment {
 
     private VODPlayer mPlayer;
     private View mView;
@@ -30,6 +33,8 @@ public class VodChatHistoryFragment extends Fragment {
     public VodChatHistoryFragment(VODPlayer player) {
 
         this.mPlayer = player;
+        chapterListAdapter = new ChapterListAdapter();
+        chatMsgs = new ArrayList<ChatMsg>();
     }
 
     @Override
@@ -38,18 +43,14 @@ public class VodChatHistoryFragment extends Fragment {
 
         mView = inflater.inflate(R.layout.xdf_vodplayer_chapter_fragment, null);
         lvChapterList = (ListView) mView.findViewById(R.id.doc_lv);
-
-        chapterListAdapter = new ChapterListAdapter();
-        chatMsgs = new ArrayList<ChatMsg>();
         lvChapterList.setAdapter(chapterListAdapter);
-
+        chapterListAdapter.notifyData(chatMsgs);
         return mView;
-
     }
 
     public void setData(List<ChatMsg> chatMsgs) {
+        this.chatMsgs = chatMsgs;
         if (null != chapterListAdapter) {
-            this.chatMsgs = chatMsgs;
             chapterListAdapter.notifyData(chatMsgs);
         }
     }
@@ -94,7 +95,7 @@ public class VodChatHistoryFragment extends Fragment {
             ViewHolder viewHolder = null;
             if (null == convertView) {
                 convertView = LayoutInflater.from(parent.getContext()).inflate(
-                        R.layout.chat_listitem_layout, null);
+                        R.layout.xdf_player_chat_listitem_layout, null);//xdf_player_chat_listitem_layout.xml  ,chat_listitem_layout
                 viewHolder = new ViewHolder(convertView);
                 convertView.setTag(viewHolder);
             } else {
@@ -107,22 +108,26 @@ public class VodChatHistoryFragment extends Fragment {
 
         private class ViewHolder {
             private TextView chatnametext;
-            private TextView chatcontexttextview;
+            private MyTextViewEx chatcontexttextview;
             private TextView chattimetext;
 
             private String getChapterTime(long time) {
-                return String.format("%02d", time / (3600 * 1000))
-                        + ":"
-                        + String.format("%02d", time % (3600 * 1000)
-                        / (60 * 1000))
-                        + ":"
-                        + String.format("%02d", time % (3600 * 1000)
-                        % (60 * 1000) / 1000);
+//                return String.format("%02d", time / (3600 * 1000))
+//                        + ":"
+//                        + String.format("%02d", time % (3600 * 1000)
+//                        / (60 * 1000))
+//                        + ":"
+//                        + String.format("%02d", time % (3600 * 1000)
+//                        % (60 * 1000) / 1000);
+
+//                return String.format("%02d", new Object[]{Long.valueOf((time / 3600L % 24L + 8L) % 24L)}) + ":" + String.format("%02d", new Object[]{Long.valueOf(time % 3600L / 60L)}) + ":" + String.format("%02d", new Object[]{Long.valueOf(time % 3600L % 60L)});
+                LogUtils.e(TAG, "--- time----" + time);
+                return DateUtils.timeFormate(time);
             }
 
             public ViewHolder(View view) {
                 chatnametext = (TextView) view.findViewById(R.id.chatnametext);
-                chatcontexttextview = (TextView) view.findViewById(R.id.chatcontexttextview);
+                chatcontexttextview = (MyTextViewEx) view.findViewById(R.id.chatcontexttextview);
                 chatcontexttextview.setVisibility(View.VISIBLE);
                 chattimetext = (TextView) view.findViewById(R.id.chattimetext);
             }
@@ -130,7 +135,7 @@ public class VodChatHistoryFragment extends Fragment {
             public void init(ChatMsg chapterInfo, int position) {
                 chatnametext.setText(chapterInfo.getSender());
                 chattimetext.setText(getChapterTime(chapterInfo.getTimeStamp()));
-                chatcontexttextview.setText(chapterInfo.getContent());
+                chatcontexttextview.setRichText(chapterInfo.getRichText());
             }
         }
 

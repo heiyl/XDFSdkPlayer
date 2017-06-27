@@ -2,7 +2,6 @@ package com.gensee.vod.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,13 +15,15 @@ import com.gensee.R;
 import com.gensee.entity.DocInfo;
 import com.gensee.entity.PageInfo;
 import com.gensee.media.VODPlayer;
+import com.gensee.player.fragement.BaseFragment;
+import com.gensee.utils.LogUtils;
 import com.gensee.vod.model.ChapterInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ValidFragment")
-public class VodChapterFragment extends Fragment {
+public class VodChapterFragment extends BaseFragment {
 
     private VODPlayer mPlayer;
     private View mView;
@@ -40,6 +41,7 @@ public class VodChapterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        LogUtils.e(TAG, "onCreateView: " + this.getClass().getSimpleName());
         mView = inflater.inflate(R.layout.xdf_vodplayer_chapter_fragment, null);
         lvChapterList = (ListView) mView.findViewById(R.id.doc_lv);
 
@@ -174,7 +176,7 @@ public class VodChapterFragment extends Fragment {
                 tvTitle.setText(chapterInfo.getDocName());
 
                 if (selectedPosition == position) {
-                    lyChapter.setBackgroundResource(R.color.red);
+                    lyChapter.setBackgroundResource(R.color.white);
                 } else {
                     lyChapter.setBackgroundResource(R.color.transparent);
                 }

@@ -56,4 +56,17 @@
     <string name="errcode_deny">发送被拒绝</string>
     <string name="errcode_unsupported">不支持错误</string>
     <string name="errcode_unknown">发送返回</string>
+
+    <string name="help_step1_title">1. 为什么听不到老师的声音？</string>
+    <string name="help_step1">第1步：可能老师还没有开启话筒哦！请在聊天区与老师确认话筒是否已开启。
+        \n第2步：可能你的手机正处于静音模式哦！请将手机设置为“非静音模式”，建议佩戴耳机，收听效果更佳哦！</string>
+    <string name="help_step2_title">2. 视频卡顿怎么解决？</string>
+    <string name="help_step2">第1招：建议在WiFi环境下听课，以保证收听效果并节省手机流量。
+        \n第2招：退出重新进入听课页面。
+        \n第3招：点击视频右上角下拉箭头，切换至“纯音频”模式。
+        \n第4招：点击视频右上角下拉箭头，选择“优选网络”，切换至其他网络服务商。</string>
+    <string name="help_step3_title">3. 直播时为什么会有延迟现象？</string>
+    <string name="help_step3">受制于不同的网络状况，直播期间有10秒左右的延迟属于正常现象哦！如果您很介意，那么建议更换到更稳定的WiFi网络中听课哦！</string>
+
+
 </resources>

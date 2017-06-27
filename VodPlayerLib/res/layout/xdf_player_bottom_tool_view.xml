@@ -1,181 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_bottom"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/app_color_backgroud"
+    android:layout_height="50dp"
+    android:layout_alignParentBottom="true"
     android:orientation="vertical">
 
-    <!--
-          <com.gensee.pdu.GSDocView
-        android:id="@+id/imdocview"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    -->
-
-    <com.gensee.view.GSDocViewGx
-        android:id="@+id/imGlDocView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/ll_bottom"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"
-        android:padding="5dp"
-        android:visibility="visible" />
+        android:layout_height="1px"
+        android:background="@color/app_color_diver" />
 
     <LinearLayout
-        android:id="@+id/ll_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/ll_bottom"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/xdf_logo" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="暂无文档"
-            android:textColor="@color/app_color_text_black_first"
-            android:textSize="14sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:background="@color/app_color_diver" />
-
+        <!-- 加入学习群-->
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/ll_group"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_fcfcfc"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <!-- 加入学习群-->
             <LinearLayout
-                android:id="@+id/ll_group"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color_fcfcfc"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tab_group" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/tab_group" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="加入学习群"
-                        android:textColor="@color/app_color_text_black_first"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:text="加入学习群"
+                    android:textColor="@color/app_color_text_black_first"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-            <View
-                android:id="@+id/v_sp_line_group"
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp"
-                android:background="@color/app_color_diver" />
+        </LinearLayout>
 
-            <!-- 课程咨询-->
+        <View
+            android:id="@+id/v_sp_line_group"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/app_color_diver" />
+
+        <!-- 课程咨询-->
+        <LinearLayout
+            android:id="@+id/ll_advisory"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_fcfcfc"
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <LinearLayout
-                android:id="@+id/ll_advisory"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color_fcfcfc"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tab_consult" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/tab_consult" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="课程咨询"
-                        android:textColor="@color/app_color_text_black_first"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:text="课程咨询"
+                    android:textColor="@color/app_color_text_black_first"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-            <View
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp"
-                android:background="@color/app_color_diver" />
-            <!-- 卡顿求助-->
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="12dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/app_color_diver" />
+        <!-- 卡顿求助-->
+        <LinearLayout
+            android:id="@+id/ll_help"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/color_fcfcfc"
+            android:gravity="center"
+            android:orientation="horizontal">
+
             <LinearLayout
-                android:id="@+id/ll_help"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@color/color_fcfcfc"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <LinearLayout
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tab_help" />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/tab_help" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="6dp"
-                        android:text="卡顿求助"
-                        android:textColor="@color/app_color_text_black_first"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:text="卡顿求助"
+                    android:textColor="@color/app_color_text_black_first"
+                    android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>

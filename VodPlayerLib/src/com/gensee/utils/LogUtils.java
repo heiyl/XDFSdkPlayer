@@ -1,16 +1,16 @@
-package com.bjttxs.readingpro.utils;
+package com.gensee.utils;
 
 import android.text.TextUtils;
 import android.util.Log;
 
 /**
- * Description:日志工具类
+ * 日志工具类
  */
 public class LogUtils {
     /**
      * 日志的开关，当项目上线时，关闭掉开关
      */
-    private static boolean isShowing = HttpUrl.DEBUG;
+    private static boolean isShowing = API.isDebug;
 
     public static void v(String tag, String text) {
         if (isShowing) {

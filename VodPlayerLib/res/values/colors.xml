@@ -29,4 +29,6 @@
     <color name="color_fcfcfc">#fcfcfc</color>
     <color name="blue_large">#39b4ff</color>
     <color name="blue_low">#72caff</color>
+
+    <color name="color_cccccc">#cccccc</color>
 </resources>

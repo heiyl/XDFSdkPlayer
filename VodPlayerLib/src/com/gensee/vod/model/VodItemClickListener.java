@@ -7,4 +7,6 @@ package com.gensee.vod.model;
  */
 
 public interface VodItemClickListener {
+
+    void onItemClickListener(PlLive.Lesson lesson);
 }

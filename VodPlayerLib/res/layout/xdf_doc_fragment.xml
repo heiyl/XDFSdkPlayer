@@ -42,5 +42,5 @@
 
     </LinearLayout>
 
-    <!--<include layout="@layout/xdf_player_bottom_tool_view" />-->
+    <include layout="@layout/xdf_player_bottom_tool_view" />
 </RelativeLayout>

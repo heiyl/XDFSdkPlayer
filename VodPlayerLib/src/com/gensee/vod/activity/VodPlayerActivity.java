@@ -9,7 +9,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -39,42 +39,51 @@ import com.gensee.entity.QAMsg;
 import com.gensee.entity.VodObject;
 import com.gensee.media.PlaySpeed;
 import com.gensee.media.VODPlayer;
-import com.gensee.player.adapter.ViewPagerAdapter;
 import com.gensee.player.LogCatService;
+import com.gensee.player.activity.PlSlidUpActivity;
+import com.gensee.player.activity.PlSlidUpHelpActivity;
+import com.gensee.player.adapter.ViewPagerAdapter;
+import com.gensee.player.model.PlGroup;
 import com.gensee.taskret.OnTaskRet;
+import com.gensee.utils.API;
 import com.gensee.utils.DensityUtil;
 import com.gensee.utils.GenseeLog;
+import com.gensee.utils.LogUtils;
 import com.gensee.utils.StringUtil;
 import com.gensee.view.GSVideoView;
 import com.gensee.vod.VodSite;
 import com.gensee.vod.VodSite.OnVodListener;
-import com.gensee.vod.fragment.VodChapterFragment;
 import com.gensee.vod.fragment.VodChatHistoryFragment;
 import com.gensee.vod.fragment.VodDocFragment;
+import com.gensee.vod.fragment.VodLessionFragment;
 import com.gensee.vod.model.ChapterInfo;
+import com.gensee.vod.model.PlLive;
+import com.gensee.vod.model.VodItemClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.finalteam.okhttpfinal.BaseHttpRequestCallback;
+import cn.finalteam.okhttpfinal.HttpCycleContext;
+import cn.finalteam.okhttpfinal.HttpRequest;
+import cn.finalteam.okhttpfinal.HttpTaskHandler;
+import cn.finalteam.okhttpfinal.RequestParams;
+import okhttp3.Headers;
+import okhttp3.Response;
 
-public class VodPlayerActivity extends FragmentActivity implements OnClickListener, OnVodListener,SeekBar.OnSeekBarChangeListener,VODPlayer.OnVodPlayListener,OnTabSelectListener {
+import static com.gensee.R.id.iv_back;
 
+
+public class VodPlayerActivity extends FragmentActivity implements OnClickListener, OnVodListener, SeekBar.OnSeekBarChangeListener, VODPlayer.OnVodPlayListener, OnTabSelectListener, HttpCycleContext {
+
+
+    protected final String HTTP_TASK_KEY = "HttpTaskKey_" + hashCode();
     private String TAG = "VodPlayerActivity";
 
-    MyOrientoinListener myOrientoinListener;
+    //    MyOrientoinListener myOrientoinListener;
     private VodSite vodSite;
 
-    //初始化的参数
-    private String domain = "xdfjt.gensee.com";
-    private String number = "65494859";
-    private String account = "";
-    private String accPwd = "";
-    private String nickName = "android";
-    private String vodPwd = "547282";
     private ServiceType serviceType = ServiceType.TRAINING;
-
-    private String vodId;
-
 
     private VODPlayer mVodPlayer;
     private GSVideoView gsVideoView;
@@ -84,21 +93,41 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
     private ImageView mPauseScreenplay;
 
     private LinearLayout llt_bottom;
-    private ImageView iv_screen;
+    private ImageView mBackBtn, mFullScreenBtn;
 
-    private int lastPostion = 0;
+    private SlidingTabLayout mStlTab;
+    private ViewPager mViewPager;
 
-
-    SlidingTabLayout mStlTab;
-    ViewPager mViewPager;
-
-    VodDocFragment vodDocFragment;
-    VodChapterFragment vodChapterFragment;
-    VodChatHistoryFragment vodChatHistoryFragment;
+    private VodDocFragment vodDocFragment;
+    private VodChatHistoryFragment vodChatHistoryFragment;
 
     private ArrayList<String> mTagList = new ArrayList<String>();
     private ArrayList<Fragment> mFragmentList;
     private ViewPagerAdapter mPagerAdapter;
+
+
+    private LinearLayout mLlGroup;
+    private LinearLayout mLlAdvisory;
+    private LinearLayout mLlHelp;
+    private View mSpLineGoup;
+
+    protected static final String SLID_UP_TYPE = "slid_up_type";
+    protected static final int SLID_UP_GROUP = 1;
+    protected static final int SLID_UP_ADVISORY = 2;
+    protected static final int SLID_UP_HELP = 3;
+    private PlGroup.Group mGroup = null;
+
+    //初始化的参数
+    private int lastPostion = 0;
+
+    private String domain = "";
+    private String number = "";
+    private String account = "";
+    private String accPwd = "";
+    private String nickName = "";
+    private String vodPwd = "";
+    private String courseId = "";
+    private String vodId;
 
     public interface RESULT {
         int ON_GET_VODOBJ = 100;
@@ -133,12 +162,12 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        myOrientoinListener = new MyOrientoinListener(this);
-        boolean autoRotateOn = (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
-        //检查系统是否开启自动旋转
-        if (autoRotateOn) {
-            myOrientoinListener.enable();
-        }
+//        myOrientoinListener = new MyOrientoinListener(this);
+//        boolean autoRotateOn = (android.provider.Settings.System.getInt(getContentResolver(), Settings.System.ACCELEROMETER_ROTATION, 0) == 1);
+//        //检查系统是否开启自动旋转
+//        if (autoRotateOn) {
+//            myOrientoinListener.enable();
+//        }
 
         setContentView(R.layout.xdf_voidplayer_activity);
         startLogService();
@@ -147,12 +176,12 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
          * 代理使用，如果app有自己的代理，调用setTcpProxy， 然后在IGSOLProxy的ip和端口回调中返回相应的代理ip和代理端口，
 		 * 没有代理则无需调用。此函数任何时候都可以调用。
 		 */
-		/*
-		 * VodSite.setTcpProxy(new IProxy() {
-		 * 
+        /*
+         * VodSite.setTcpProxy(new IProxy() {
+		 *
 		 * @Override public int getProxyPort(int port) { // 返回代理端口 return port;
 		 * }
-		 * 
+		 *
 		 * @Override public String getProxyIP(String ip) { // 返回代理ip地址 return
 		 * ip; } });
 		 */
@@ -168,15 +197,91 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
 
             }
         });
+        initData();
         initViews();
+        bindListener();
         bindViewPager();
         initParams();
+        getGroupInfo();
+        LogUtils.e(TAG, "onCreate");
+    }
+
+    private void bindListener() {
+        mVodPlayer = new VODPlayer();
+        mVodPlayer.setGSVideoView(gsVideoView);
+        mFullScreenBtn.setOnClickListener(this);
+        mBackBtn.setOnClickListener(this);
+
+        mSeekBarPlayViedo.setOnSeekBarChangeListener(this);
+
+        mPauseScreenplay.setOnClickListener(this);
+
+        mLlGroup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(VodPlayerActivity.this, PlSlidUpActivity.class);
+                Bundle data = new Bundle();
+                data.putSerializable("group", mGroup);
+                intent.putExtra(SLID_UP_TYPE, SLID_UP_GROUP);
+                intent.putExtras(data);
+                VodPlayerActivity.this.startActivity(intent);
+            }
+        });
+
+        mLlAdvisory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VodPlayerActivity.this, PlSlidUpActivity.class);
+                intent.putExtra(SLID_UP_TYPE, SLID_UP_ADVISORY);
+                VodPlayerActivity.this.startActivity(intent);
+            }
+        });
+
+        mLlHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VodPlayerActivity.this, PlSlidUpHelpActivity.class);
+                intent.putExtra(SLID_UP_TYPE, SLID_UP_HELP);
+                VodPlayerActivity.this.startActivity(intent);
+            }
+        });
+
+        gsVideoView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doubleClick();
+            }
+        });
+    }
+
+    private long[] mHits = new long[2];
+
+    private void doubleClick() {
+        System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+        mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+        if (mHits[mHits.length - 1] - mHits[0] < 500) {
+            switchFullScreen();
+        }
+    }
+
+    private void initData() {
+        Intent intent = getIntent();
+        domain = intent.getStringExtra("domain");
+        account = intent.getStringExtra("account");
+        accPwd = intent.getStringExtra("accPwd");
+        nickName = intent.getStringExtra("nickName");
+        number = intent.getStringExtra("number");
+        vodPwd = intent.getStringExtra("vodPwd");
+        courseId = intent.getStringExtra("courseId");
     }
 
     private void initViews() {
-        gsVideoView = (GSVideoView)findViewById(R.id.impvoteview);
-        mStlTab = (SlidingTabLayout)findViewById(R.id.stl_tab);
-        mViewPager = (ViewPager)findViewById(R.id.viewPager);
+
+        mBackBtn = (ImageView) findViewById(iv_back);
+        gsVideoView = (GSVideoView) findViewById(R.id.impvoteview);
+        mStlTab = (SlidingTabLayout) findViewById(R.id.stl_tab);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
 
         lastPostion = getPreferences(MODE_PRIVATE).getInt("lastPos", 0);
         mSeekBarPlayViedo = (SeekBar) findViewById(R.id.seekbarpalyviedo);
@@ -184,23 +289,22 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
         mNowTimeTextview = (TextView) findViewById(R.id.palynowtime);
         mAllTimeTextView = (TextView) findViewById(R.id.palyalltime);
 
-        mSeekBarPlayViedo.setOnSeekBarChangeListener(this);
-
-        mPauseScreenplay.setOnClickListener(this);
-
         llt_bottom = (LinearLayout) findViewById(R.id.llt_bottom);
-        iv_screen = (ImageView) findViewById(R.id.iv_screen);
-        iv_screen.setOnClickListener(this);
-        mVodPlayer = new VODPlayer();
-        mVodPlayer.setGSVideoView(gsVideoView);
+        mFullScreenBtn = (ImageView) findViewById(R.id.iv_screen);
 
-
+        mLlGroup = (LinearLayout) findViewById(R.id.ll_group);
+        mLlAdvisory = (LinearLayout) findViewById(R.id.ll_advisory);
+        mLlHelp = (LinearLayout) findViewById(R.id.ll_help);
+        mSpLineGoup = findViewById(R.id.v_sp_line_group);
     }
 
-    public void bindViewPager() {
+    private VodLessionFragment mChapterCourseFragment;
+
+    private void bindViewPager() {
         vodDocFragment = new VodDocFragment(mVodPlayer);
-        vodChapterFragment = new VodChapterFragment(mVodPlayer);
         vodChatHistoryFragment = new VodChatHistoryFragment(mVodPlayer);
+        mChapterCourseFragment = new VodLessionFragment(mVodPlayer);
+        mChapterCourseFragment.setVodItemClickListener(vodItemClickListener);
 
         if (mFragmentList == null) {
             mFragmentList = new ArrayList<Fragment>();
@@ -212,7 +316,7 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
         mTagList.add("课节");
         mTagList.add("聊天");
         mFragmentList.add(vodDocFragment);
-        mFragmentList.add(vodChapterFragment);
+        mFragmentList.add(mChapterCourseFragment);
         mFragmentList.add(vodChatHistoryFragment);
 
         mPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), mFragmentList);
@@ -226,6 +330,18 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
         mStlTab.notifyDataSetChanged();
     }
 
+    private final VodItemClickListener vodItemClickListener = new VodItemClickListener() {
+        @Override
+        public void onItemClickListener(PlLive.Lesson lesson) {
+
+            if (lesson == null) return;
+            number = lesson.getGenseeVideoNum();
+            vodPwd = lesson.getStudentClientToken();
+            initParams();
+            LogUtils.e(TAG, lesson.getLessonName() + "---number--" + number + "---vodPwd--" + vodPwd + "-----");
+        }
+    };
+
     @Override
     public void onTabSelect(int position) {
 
@@ -237,12 +353,6 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
     }
 
     public void initParams() {
-        domain = "xdfjt.gensee.com";
-        number = "65494859";
-        account = "";
-        accPwd = "";
-        nickName = "android";
-        vodPwd = "547282";
 
         // initParam的构造
         InitParam initParam = new InitParam();
@@ -275,13 +385,6 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
         vodSite = new VodSite(this);
         vodSite.setVodListener(this);
         vodSite.getVodObject(initParam);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        //销毁时取消监听
-        myOrientoinListener.disable();
     }
 
     /********************* OnVodListener **************************/
@@ -469,9 +572,9 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
                     mAllTimeTextView.setText(getTime(max));
                     mVodPlayer.seekTo(lastPostion);
                     mPauseScreenplay.setImageResource(R.drawable.icon_pause);
-                    if(vodChapterFragment != null && msg.obj != null) {
-                        vodChapterFragment.setData(msg.obj);
-                    }
+//                    if (vodChapterFragment != null && msg.obj != null) {
+//                        vodChapterFragment.setData(msg.obj);
+//                    }
                     break;
                 case MSG.MSG_ON_STOP:
 
@@ -480,7 +583,7 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
 
                     break;
                 case MSG.MSG_ON_PAGE:
-                    int position = (Integer)msg.obj;
+                    int position = (Integer) msg.obj;
                     break;
                 case MSG.MSG_ON_PAUSE:
                     VIEDOPAUSEPALY = 1;
@@ -551,7 +654,7 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
         speedItem = 0;
         mVodPlayer.setSpeed(PlaySpeed.SPEED_NORMAL, null);
         mVodPlayer.setGSVideoView(gsVideoView);
-        mVodPlayer.play(vodIdOrLocalPath, this, "",false);
+        mVodPlayer.play(vodIdOrLocalPath, this, "", false);
     }
 
     private String getTime(int time) {
@@ -571,9 +674,9 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
         if (mVodPlayer == null) {
             mVodPlayer = new VODPlayer();
             mVodPlayer.setGSVideoView(gsVideoView);
-            mVodPlayer.play(vodIdOrLocalPath, this, "",false);
-        }else {
-            mVodPlayer.play(vodIdOrLocalPath, this, "",false);
+            mVodPlayer.play(vodIdOrLocalPath, this, "", false);
+        } else {
+            mVodPlayer.play(vodIdOrLocalPath, this, "", false);
         }
     }
 
@@ -592,7 +695,7 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
     @Override
     public void onInit(int result, boolean haveVideo, int duration,
                        List<DocInfo> docInfos) {
-        if (lastPostion >= duration-1000) {
+        if (lastPostion >= duration - 1000) {
             lastPostion = 0;
         }
         Message message = new Message();
@@ -658,7 +761,6 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
     }
 
 
-
     @Override
     public void onPageSize(int position, int w, int h) {
         //文档翻页切换，开始显示
@@ -707,7 +809,7 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
             speedItem = 0;
             mVodPlayer.setSpeed(PlaySpeed.SPEED_NORMAL, null);
             mVodPlayer.setGSVideoView(gsVideoView);
-            mVodPlayer.play(vodIdOrLocalPath, this, "",false);
+            mVodPlayer.play(vodIdOrLocalPath, this, "", false);
 
         } else if (currenView.getId() == R.id.pauseresumeplay) {
             if (VIEDOPAUSEPALY == 0) {
@@ -715,18 +817,24 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
             } else if (VIEDOPAUSEPALY == 1) {
                 mVodPlayer.resume();
             }
-        } else if(currenView.getId() == R.id.speed){
+        } else if (currenView.getId() == R.id.speed) {
             switchSpeed();
-        }else if(currenView.getId() == R.id.iv_screen) {
-            int orientation = getRequestedOrientation();
-            if (orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
-                    || orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-                orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE;
-            } else {
-                orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
-            }
-            setRequestedOrientation(orientation);
+        } else if (currenView.getId() == R.id.iv_screen) {
+            switchFullScreen();
+        } else if (currenView.getId() == iv_back) {
+            this.onBackPressed();
         }
+    }
+
+    private void switchFullScreen() {
+        int orientation = getRequestedOrientation();
+        if (orientation == ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
+                || orientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE;
+        } else {
+            orientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT;
+        }
+        setRequestedOrientation(orientation);
     }
 
     /**
@@ -917,7 +1025,8 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
     }
 
     /**
-     *  msg 的时候，id代表要删除的聊天消息id，user的时候，代表用户id，强转为long型后进行用户id匹配删除该id说有的聊天消息
+     * msg 的时候，id代表要删除的聊天消息id，user的时候，代表用户id，强转为long型后进行用户id匹配删除该id说有的聊天消息
+     *
      * @param type msg(CHATCENSOR_MSG) / user(CHATCENSOR_USER)
      * @param id   msgId/userId
      */
@@ -948,7 +1057,7 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
         llt_bottom.setVisibility(View.VISIBLE);
         ViewGroup.LayoutParams params = gsVideoView.getLayoutParams();
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        params.height = DensityUtil.dip2px(this,281);
+        params.height = DensityUtil.dip2px(this, 281);
         gsVideoView.setLayoutParams(params);
     }
 
@@ -994,5 +1103,82 @@ public class VodPlayerActivity extends FragmentActivity implements OnClickListen
         }
     }
 
+    /**
+     * 获取群组信息
+     */
+    private void getGroupInfo() {
+
+        RequestParams params = new RequestParams(this);
+        params.addFormDataPart("courseId", courseId);
+        params.addFormDataPart("appKey", API.ESTUDY_APP_KEY);
+        params.addFormDataPart("channelID", API.ESTUDY_CHANNEL_ID);
+        LogUtils.e("getGroupInfo ", API.GROUP_INTO_URL + "?" + params);
+
+        HttpRequest.post(API.GROUP_INTO_URL, params, new BaseHttpRequestCallback<PlGroup>() {
+            @Override
+            public void onStart() {
+                super.onStart();
+            }
+
+            @Override
+            protected void onSuccess(PlGroup resp) {
+                super.onSuccess(resp);
+                if (resp != null) {
+                    if (resp.getStatus()) {
+                        if (resp.getResult() != null && resp.getResult().size() > 0) {
+                            //有群组信息
+                            mGroup = resp.getResult().get(0);
+                            mLlGroup.setVisibility(View.VISIBLE);
+                            mSpLineGoup.setVisibility(View.VISIBLE);
+                        } else {
+                            //无群组信息
+                            mLlGroup.setVisibility(View.GONE);
+                            mSpLineGoup.setVisibility(View.GONE);
+                        }
+                    } else {
+                        //无群组信息
+                        mLlGroup.setVisibility(View.GONE);
+                        mSpLineGoup.setVisibility(View.GONE);
+                        Toast.makeText(VodPlayerActivity.this, resp.getInfo(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    //无群组信息
+                    mLlGroup.setVisibility(View.GONE);
+                    mSpLineGoup.setVisibility(View.GONE);
+                    Toast.makeText(VodPlayerActivity.this, "提交失败，请稍候重试", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onResponse(Response httpResponse, String response, Headers headers) {
+                super.onResponse(httpResponse, response, headers);
+
+                LogUtils.e("PlSlidUpActivity", response);
+            }
+
+            @Override
+            public void onFailure(int errorCode, String msg) {
+                super.onFailure(errorCode, msg);
+                Toast.makeText(VodPlayerActivity.this, msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /**
+     * 网络连接取消
+     */
+    @Override
+    public String getHttpTaskKey() {
+        return HTTP_TASK_KEY;
+    }
+
+    @Override
+    protected void onDestroy() {
+        HttpTaskHandler.getInstance().removeTask(HTTP_TASK_KEY);
+        super.onDestroy();
+        //销毁时取消监听
+//        myOrientoinListener.disable();
+        LogUtils.e(TAG, "onDestroy");
+    }
 
 }

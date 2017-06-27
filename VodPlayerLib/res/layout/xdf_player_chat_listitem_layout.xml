@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xdf="http://schemas.android.com/apk/res-auto"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/chat_view_bg" >
+    android:background="@color/chat_view_bg">
+
     <com.gensee.widget.CustomShapeImage
         android:id="@+id/iv_photo"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="17dp"
-        android:src="@drawable/icon_default"
         android:scaleType="fitXY"
+        android:src="@drawable/icon_default"
         xdf:shape_type="1" />
+
     <TextView
         android:id="@+id/chatnametext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/iv_photo"
-        android:paddingLeft="10dp"
         android:layout_toRightOf="@id/iv_photo"
+        android:paddingLeft="10dp"
         android:text="@string/sytsemmesg"
         android:textColor="@color/app_color_text_black_first"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/chattimetext"
@@ -35,7 +36,7 @@
         android:layout_toRightOf="@id/chatnametext"
         android:text="@string/displaytime"
         android:textColor="@color/app_color_text_black_third"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <com.gensee.view.MyTextViewEx
         android:id="@+id/chatcontexttextview"
@@ -43,11 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/chatnametext"
         android:layout_below="@id/chatnametext"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="13dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/chat_receiver_teacher_bg"
         android:textColor="@color/app_color_text_black_first"
-        android:textSize="@dimen/chat_listview_context"
-        android:background="@drawable/chat_receiver_teacher_bg"/>
+        android:textSize="@dimen/chat_listview_context" />
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -1,63 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/chapter_ly"
+    android:id="@+id/ll_item"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/blue_large"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     android:clickable="false"
     android:focusable="false"
-    android:orientation="vertical"
-    android:padding="@dimen/doc_padding">
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/chapter_time"></TextView>
-
-            <TextView
-                android:id="@+id/chapter_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/chapter_title"></TextView>
-
-            <TextView
-                android:id="@+id/chapter_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></TextView>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp">
+
+        <View
+            android:id="@+id/v_top_line"
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/app_color_diver" />
 
         <TextView
+            android:id="@+id/tv_index"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_below="@id/v_top_line"
+            android:layout_centerVertical="true"
+            android:background="@drawable/gray_circle_bg"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/tv_index"
+            android:layout_centerHorizontal="true"
+            android:background="@color/app_color_diver" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/doc_title"></TextView>
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            android:text="4月24日 20：00-21：00"
+            android:textColor="@color/app_color_text_black_first"
+            android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/doc_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></TextView>
-    </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/app_color_diver"
+            android:paddingBottom="0dp" />
+
+    </RelativeLayout>
 
 </LinearLayout>

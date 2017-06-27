@@ -1,15 +1,16 @@
 package com.gensee.player.model;
 
+import java.io.Serializable;
+
 /**
  * com.gensee.player.model
  * 2017-06-2017/6/19.
  * wuxu@xdf.cn
  */
 
-public class PlResponse {
+public class PlResponse implements Serializable {
 
     private int status;
-    private String result;
     private String info;
 
     public boolean getStatus() {
@@ -18,14 +19,6 @@ public class PlResponse {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
     }
 
     public String getInfo() {
