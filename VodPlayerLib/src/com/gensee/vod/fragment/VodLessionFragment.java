@@ -219,6 +219,7 @@ public class VodLessionFragment extends BaseFragment {
             private View ll_item;
             private TextView tv_time;
             private TextView tv_index;
+            private TextView tv_title;
 
             private String getChapterTime(long time) {
                 return String.format("%02d", time / (3600 * 1000))
@@ -234,6 +235,7 @@ public class VodLessionFragment extends BaseFragment {
                 ll_item = view.findViewById(R.id.ll_item);
                 tv_time = (TextView) view.findViewById(R.id.tv_time);
                 tv_index = (TextView) view.findViewById(R.id.tv_index);
+                tv_title = (TextView) view.findViewById(R.id.tv_title);
             }
 
             public void init(PlLive.Lesson lesson, int position) {
@@ -250,6 +252,7 @@ public class VodLessionFragment extends BaseFragment {
                 if (!TextUtils.isEmpty(beginTime)) {
                     eTime = Long.parseLong(endTime);
                 }
+                tv_title.setText(lesson.getLessonName());
                 tv_time.setText(DateUtils.getMonthDate(bTime) + " - " + DateUtils.getHourDate(eTime));
                 if (selectedPosition == position) {
                     ll_item.setBackgroundResource(R.color.app_color_secondary);

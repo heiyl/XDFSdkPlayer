@@ -12,7 +12,6 @@
         android:layout_marginLeft="15dp"
         android:layout_marginTop="17dp"
         android:scaleType="fitXY"
-        android:src="@drawable/icon_default"
         xdf:shape_type="1" />
 
     <TextView

@@ -218,7 +218,6 @@ public class PlayerActivity extends FragmentActivity implements OnPlayListener, 
             }
             initInitParam();
         }
-
     }
 
     @Override

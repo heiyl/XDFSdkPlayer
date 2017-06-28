@@ -35,6 +35,11 @@ public class CustomChatImplAdapter extends CustomAbsChatAdapter {
 		}
 
 		@Override
+		protected int getChatIconId() {
+			return R.id.iv_photo;
+		}
+
+		@Override
 		protected int getChatNameEdtid() {
 			return R.id.chatnametext;
 		}
