@@ -24,7 +24,7 @@ import java.util.HashMap;
 public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
     private Context mContext;
     private final HashMap<String, Integer> iconMap = new HashMap<String, Integer>();
-    private final int[] userIconId = {R.drawable.head01, R.drawable.head02, R.drawable.head03, R.drawable.head04};
+    private final int[] userIconId = {R.drawable.head01, R.drawable.head02, R.drawable.head03, R.drawable.head04, R.drawable.head05};
     private long getSelfId() {
         return this.onChatAdapterListener != null ? this.onChatAdapterListener.getSelfId() : -1L;
     }
@@ -123,12 +123,44 @@ public abstract class CustomAbsChatAdapter extends AbsChatAdapter {
                     if (index != null) {
                         mIcon.setBackgroundResource(userIconId[index]);
                     } else {
-                        Integer iconIndex = positon % 4;
+                        Integer iconIndex = getResourceIndex(name);
                         iconMap.put(name, iconIndex);
                         mIcon.setBackgroundResource(userIconId[iconIndex]);
                     }
                 }
             }
+        }
+
+        private int getResourceIndex(String name) {
+
+            String hashCode = name.hashCode() + "";
+            int length = hashCode.length();
+            String lastCode = hashCode.substring(length - 1, length);
+            int code = Integer.parseInt(lastCode);
+            int resId = 0;
+            switch (code) {
+                case 0:
+                case 5:
+                    resId = 0;
+                    break;
+                case 1:
+                case 6:
+                    resId = 1;
+                    break;
+                case 2:
+                case 7:
+                    resId = 2;
+                    break;
+                case 3:
+                case 8:
+                    resId = 3;
+                    break;
+                case 4:
+                case 9:
+                    resId = 4;
+                    break;
+            }
+            return resId;
         }
 
         public void onTimeTextView(int positon) {

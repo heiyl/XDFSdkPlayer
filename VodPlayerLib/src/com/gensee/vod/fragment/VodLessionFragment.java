@@ -254,11 +254,11 @@ public class VodLessionFragment extends BaseFragment {
                 }
                 tv_title.setText(lesson.getLessonName());
                 tv_time.setText(DateUtils.getMonthDate(bTime) + " - " + DateUtils.getHourDate(eTime));
-                if (selectedPosition == position) {
-                    ll_item.setBackgroundResource(R.color.app_color_secondary);
-                } else {
-                    ll_item.setBackgroundResource(R.color.white);
-                }
+//                if (selectedPosition == position) {
+//                    ll_item.setBackgroundResource(R.color.app_color_secondary);
+//                } else {
+//                    ll_item.setBackgroundResource(R.color.white);
+//                }
             }
         }
     }
