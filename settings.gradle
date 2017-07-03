@@ -1,1 +1,1 @@
-include ':app', ':rtmpResourceLib', ':VodPlayerLib'
+include ':app', ':LiveResourceLib', ':LivePlayerLib'
