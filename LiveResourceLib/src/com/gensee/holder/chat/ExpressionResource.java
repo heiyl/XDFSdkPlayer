@@ -1,12 +1,12 @@
 package com.gensee.holder.chat;
 
-import java.util.List;
-
 import android.content.Context;
 import android.util.Log;
 
 import com.gensee.chat.gif.AbsChatResource;
 import com.gensee.rtmpresourcelib.R;
+
+import java.util.List;
 
 public class ExpressionResource extends AbsChatResource{
 	
